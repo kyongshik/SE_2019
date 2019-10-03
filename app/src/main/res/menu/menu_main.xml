@@ -15,6 +15,7 @@
         android:title="profile"
         android:icon="@drawable/toolbar_profile"
         app:showAsAction="always"
+
          />
 
 </menu>
