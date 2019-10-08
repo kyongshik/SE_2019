@@ -9,6 +9,7 @@ public class Room implements Parcelable
     private String name;
     private ArrayList<String> info;
     private String date;
+    private String code;
 
     public Room(String name) {
         this.name = name;
@@ -19,6 +20,7 @@ public class Room implements Parcelable
         name = in.readString();
         info = in.createStringArrayList();
         date = in.readString();
+        code = in.readString();
     }
 
     public static final Creator<Room> CREATOR = new Creator<Room>() {
@@ -43,16 +45,16 @@ public class Room implements Parcelable
         dest.writeString(name);
         dest.writeStringList(info);
         dest.writeString(date);
+        dest.writeString(code);
     }
 
     public String getName() {
         return name;
     }
-
     public String getmenu1()
     {
         return info.get(0);
-    }
+    }//이것들 이름 아직 안바꿈
     public String getmenu2()
     {
         return info.get(1);
@@ -62,10 +64,10 @@ public class Room implements Parcelable
         return info.get(2);
     }
 
-
     public String getDate() {
         return date;
     }
+    public String getcode(){return code;}
 
     public String printmenu(){
         String str = info.get(0) + ", " + info.get(1) + ", " +info.get(2);
@@ -83,6 +85,7 @@ public class Room implements Parcelable
     public void setDate(String date) {
         this.date = date;
     }
+    public void setCode(String code){this.code = code;}
 
 
 }
