@@ -9,8 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddRoom"></activity>
-        <activity android:name=".RoomForum" />
+        <activity android:name=".AddPost"></activity>
+        <activity
+            android:name=".AddRoom"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.ADDROOM" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RoomPost" />
         <activity
             android:name=".MainActivity"
             android:label=""

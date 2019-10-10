@@ -2,13 +2,13 @@ package com.example.se_2019;
 
 import android.os.Bundle;
 
-public class RoomForum extends MainActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AddPost extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_room_forum);
+        setContentView(R.layout.activity_add_post);
     }
-
-
 }
