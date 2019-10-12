@@ -21,7 +21,7 @@ public class Register extends AppCompatActivity {
     EditText et_rid, et_rpass, et_name, et_add, et_dep2;
     ListView listView, listView2;
     private Button btn_register;
-//    DBHelper dbHelper;
+//    DBHelper dbHelper;//
 //    SQLiteDatabase db = null;
 //    Cursor cursor; //DB에서 가져온 데이터를 쉽게 처리하기 위해 제공하는 2차원 테이블을 가지는 인터페이스이다.
 //    ArrayAdapter adapter, adapter2;

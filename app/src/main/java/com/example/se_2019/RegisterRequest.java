@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisterRequest extends StringRequest {
-    //서버연동
+    //서버연동//
     // 서버URL설정 (PHP파일 연동)
     final static private String URL="http://deu04202.dothome.co.kr/Register.php";
     private Map<String, String> map;
