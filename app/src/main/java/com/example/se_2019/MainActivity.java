@@ -36,15 +36,15 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        setListView();
+        setListView();//이건 방에 대한 코드
 
     }
-    public void onClick(View v){
+    public void addBtnClick(View v){
         Intent intent = new Intent(MainActivity.this, AddRoom.class);
         intent.putExtra("roomlist", items);
         startActivityForResult(intent, NEW_ROOM);
     }
-    public void setListView() {
+    protected void setListView() {
         listView = (ListView) findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
         listView.setAdapter(adapter);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Intent intent = new Intent(MainActivity.this, RoomForum.class);
+                Intent intent = new Intent(MainActivity.this, RoomPost.class);
                 Room room = roomlist.get(position);
                 intent.putExtra("roominfo", room);
                 startActivity(intent);
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);//여기서 menu/menu_main UI를 가져옴
+        getMenuInflater().inflate(R.menu.menu_main, menu);//여기서 e/menu_main UI를 가져옴
         return true;
     }
 

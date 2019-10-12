@@ -2,14 +2,19 @@ package com.example.se_2019;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddRoom extends MainActivity {
+public class AddRoom extends AppCompatActivity {
     EditText etname,subject_name,prof_name,subject_time;
     String code="";
     Room room;
@@ -18,6 +23,14 @@ public class AddRoom extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_room);
+        //상단바
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //왼쪽에 home버튼 추가
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         etname = (EditText)findViewById(R.id.etname);
         subject_name = (EditText)findViewById(R.id.subject_name);
         prof_name = (EditText)findViewById(R.id.prof_name);
@@ -42,7 +55,10 @@ public class AddRoom extends MainActivity {
             }
             count--;
         }
-        Toast.makeText(this, "코드는 "+code+" 입니다.", Toast.LENGTH_LONG).show(); //확인용 나중에 지워야함
+        Toast.makeText(this, "방 코드는 "+code+" 입니다.", Toast.LENGTH_LONG).show(); //확인용 나중에 지워야함
+
+
+
     }
     public void onClick(View v)
     {
@@ -77,5 +93,32 @@ public class AddRoom extends MainActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         String fmdate = sdf.format(date);
         return fmdate;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);//여기서 menu/menu_main UI를 가져옴
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+        }
+        if (id == R.id.toolbar_alarm) {
+            Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+        }
+        if (id == R.id.toolbar_profile) {
+            Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            // SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
+            Intent intent = new Intent(this, Preferences.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
