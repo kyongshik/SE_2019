@@ -20,11 +20,10 @@ public LoginRequest(String userID, String userPassword, Response.Listener<String
         map = new HashMap<>();
         map.put("userID", userID);
         map.put("userPassword", userPassword);
-
         }
 
 @Override
 protected Map<String, String> getParams() throws AuthFailureError {
         return map;
         }
-        }
+}
