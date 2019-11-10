@@ -34,19 +34,37 @@ public class Register extends AppCompatActivity {
         et_rid = findViewById(R.id.et_rid);
         et_rpass = findViewById(R.id.et_rpass);
         et_name = findViewById(R.id.et_name);
-        et_add = findViewById(R.id.et_add);
-        et_dep2 = findViewById(R.id.et_dep2);
+        et_add = findViewById(R.id.et_add); //이메일
+        et_dep2 = findViewById(R.id.et_dep2); //학과
         btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 //edit text에 현재 입력되어있는 값을 가져온다
+                //학과는 입력안해도 넘어갈 수 있게 해놓음
                 String userID = et_rid.getText().toString();
                 String userPass = et_rpass.getText().toString();
                 String userName= et_name.getText().toString();
-                int userAge = 1;
+                String userAdd = et_add.getText().toString();
 
-            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                if(userID.length()==0){
+                    Toast.makeText(getApplicationContext(), "ID를 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(userPass.length()==0) {
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(userName.length()==0){
+                    Toast.makeText(getApplicationContext(), "이름을 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(userAdd.length()==0){
+                    Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
@@ -66,13 +84,10 @@ public class Register extends AppCompatActivity {
                     }
                 }
             };
-            RegisterRequest registerRequest = new RegisterRequest(userID, userPass, userName, userAge, responseListener);
+            RegisterRequest registerRequest = new RegisterRequest(userID, userPass, userName, userAdd, responseListener);
             RequestQueue queue = Volley.newRequestQueue(Register.this);
             queue.add(registerRequest);
-
-
         }
-
     });
     }
 }

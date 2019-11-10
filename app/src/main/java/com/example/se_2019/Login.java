@@ -45,6 +45,15 @@ public class Login extends AppCompatActivity {
                 //edit text에 현재 입력되어있는 값을 가져온다
                 String userID = et_lid.getText().toString();
                 String userPass = et_lpass.getText().toString();
+                if(userID.length()==0){
+                    Toast.makeText(getApplicationContext(), "ID를 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(userPass.length()==0){
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
