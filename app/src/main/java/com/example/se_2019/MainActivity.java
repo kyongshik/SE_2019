@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -25,11 +26,14 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     final int REST_INFO=21;//
     final int NEW_ROOM = 22; //
+    private TextView tv_id;
+    String userID="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //툴바
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //왼쪽에 home버튼 추가
@@ -38,10 +42,29 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setListView();//이건 방에 대한 코드
 
+        //하단에 아이디 출력
+        tv_id = findViewById(R.id.idView);
+        Intent intent = getIntent();
+        userID = intent.getStringExtra("userID");
+        tv_id.setText("userID: "+userID);
+
+        //가지고 있는 리스트 출력해야함
+        ////여기서부터
+//        Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
+//        intent.putExtra("roomlist", items);
+//        startActivityForResult(intent, NEW_ROOM);
+
     }
+    //방 추가 버튼 클릭하면 userID랑 방 정보보냄///?
     public void addBtnClick(View v){
-        Intent intent = new Intent(MainActivity.this, AddRoom.class);
-        intent.putExtra("roomlist", items);
+        //하단에 아이디 출력
+        Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
+        //bundle로 uerID랑 room info보냄
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("roomlist", items);
+        bundle.putString("userID", userID);
+        intent.putExtras(bundle);
+//        intent.putExtra("userID", userID);
         startActivityForResult(intent, NEW_ROOM);
     }
     protected void setListView() {
@@ -67,14 +90,13 @@ public class MainActivity extends AppCompatActivity {
                                 items.remove(position);
                                 items.remove(position);
                                 adapter.notifyDataSetChanged();
-//                                Snackbar.make(view, "삭제되었습니다.", 2000).show();
                             }
                         })
                         .show();
                 return true;
             }
         });
-
+        //list의 방을 클릭하면 roompost로 넘어감
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Intent intent = new Intent(MainActivity.this, RoomPost.class);
@@ -82,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("roominfo", room);
                 startActivity(intent);
             }
-
         });
     }
 
@@ -93,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if(resultCode == RESULT_OK)
             {
-                Room room = data.getParcelableExtra("newroom"); //새 레스토랑 받아옴
+                Room room = data.getParcelableExtra("newroom"); //새 방 받아옴
                 items.add(room.getName());
                 roomlist.add(room);
                 adapter.notifyDataSetChanged();

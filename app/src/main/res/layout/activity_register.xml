@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register">
+    tools:context=".RegisterActivity">
 
     <EditText
         android:id="@+id/et_rid"
@@ -21,6 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/et_rpass"
         android:layout_width="wrap_content"
@@ -35,6 +36,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/et_rid"
         app:layout_constraintTop_toBottomOf="@+id/et_rid" />
+
     <EditText
         android:id="@+id/et_dep2"
         android:layout_width="wrap_content"
@@ -83,9 +85,7 @@
         app:layout_constraintEnd_toEndOf="@+id/et_add"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/et_dep2"
-        app:layout_constraintTop_toBottomOf="@+id/et_add"
-       />
-
+        app:layout_constraintTop_toBottomOf="@+id/et_add" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

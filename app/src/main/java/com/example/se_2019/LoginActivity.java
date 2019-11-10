@@ -16,7 +16,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     EditText et_lid, et_lpass;
     private Button btn_login, btn_register;
 
@@ -29,11 +29,10 @@ public class Login extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
 
-
         btn_register.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, Register.class);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -45,6 +44,15 @@ public class Login extends AppCompatActivity {
                 //edit text에 현재 입력되어있는 값을 가져온다
                 String userID = et_lid.getText().toString();
                 String userPass = et_lpass.getText().toString();
+                if(userID.length()==0){
+                    Toast.makeText(getApplicationContext(), "ID를 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(userPass.length()==0){
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -53,7 +61,8 @@ public class Login extends AppCompatActivity {
                             boolean success = jsonObject.getBoolean("success");
                             if(success){
                                 Toast.makeText(getApplicationContext(), "로그인에 성공하였습니다.", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(Login.this, MainActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("userID", userID);
                                 startActivity(intent);
                             }
                             else{
@@ -66,14 +75,14 @@ public class Login extends AppCompatActivity {
                     }
                 };
                 LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(Login.this);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
             }
         });
     }
 
     public void pracbtnClick(View view){
-        Intent intent = new Intent(Login.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
 

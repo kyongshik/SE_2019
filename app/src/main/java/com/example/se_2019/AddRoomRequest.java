@@ -7,21 +7,21 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterRequest extends StringRequest {
-    //서버연동//
-    // 서버URL설정 (PHP파일 연동)
-    final static private String URL="http://deu04202.dothome.co.kr/Register.php";
+public class AddRoomRequest extends StringRequest {
+    //방을 추가시킬 때 해당 userID
+    final static private String URL="http://deu04202.dothome.co.kr/RoomAdd.php";
     private Map<String, String> map;
 
 
-    public RegisterRequest(String userID, String userPassword, String userName, String userAdd, Response.Listener<String> listener){
+    public AddRoomRequest(String roomID, String userID, String roomName, String subName, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
+        map.put("roomID", roomID);
         map.put("userID", userID);
-        map.put("userPassword", userPassword);
-        map.put("userName", userName);
-        map.put("userAdd", userAdd);
+        map.put("roomName", roomName);
+        map.put("subName", subName);
+
     }
 
     @Override
