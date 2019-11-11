@@ -10,6 +10,11 @@ public class Room implements Parcelable
     private ArrayList<String> info;
     private String date;
     private String code;
+    private String roomID;
+    private String userID;
+    private String roomName;
+    private String subName;
+
 
     public Room(String name) {
         this.name = name;
@@ -21,6 +26,12 @@ public class Room implements Parcelable
         info = in.createStringArrayList();
         date = in.readString();
         code = in.readString();
+    }
+    public Room(String roomID, String userID, String roomName, String subName){
+        code = this.roomID;
+        userID = this.userID;
+        roomName = this.roomName;
+        subName  = this.subName;
     }
 
     public static final Creator<Room> CREATOR = new Creator<Room>() {

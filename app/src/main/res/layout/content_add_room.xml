@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--검색하는 기능은 DB와 연동한 후 하기-->
+
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="200dp"
@@ -40,7 +40,7 @@
             app:layout_constraintVertical_bias="0.023" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -48,6 +48,7 @@
             android:layout_weight="1"
             android:background="@drawable/btnstyle"
             android:text="검색" />
+
     </LinearLayout>
 
     <LinearLayout
