@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ////여기서부터 디비에서 받아오는것 하기
         listView = findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
+
         listView.setAdapter(adapter);
         btn_list = findViewById(R.id.listbtn);
         btn_list.setOnClickListener(new View.OnClickListener(){
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                     subName = jsonObject.getString("subName");
                                     roomName = jsonObject.getString("roomName");
                                     Room room = new Room(userID, roomID, roomName, subName);
-                                    items.add(room.getName());
+                                    items.add(room.getRoomName());
                                     roomlist.add(room);
                                     adapter.notifyDataSetChanged();
 //                                    count++;
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK)
             {
                 Room room = data.getParcelableExtra("newroom"); //새 방 받아옴
-                items.add(room.getName());
+                items.add(room.getRoomName());
                 roomlist.add(room);
                 adapter.notifyDataSetChanged();
             }

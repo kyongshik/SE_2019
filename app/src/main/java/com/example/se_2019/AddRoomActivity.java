@@ -42,6 +42,7 @@ public class AddRoomActivity extends AppCompatActivity {
         room_name = (EditText)findViewById(R.id.etname);
         sub_name = (EditText)findViewById(R.id.subject_name);
 
+
         //방코드는 방 생성시 미리 정해줌
         int count=8;
         while(count>0){
@@ -79,9 +80,7 @@ public class AddRoomActivity extends AppCompatActivity {
         {
             //new room만들어서 사용자가 입력한 내용을 set함
             room = new Room(room_name.getText().toString());
-            room.setMenu(sub_name.getText().toString());
-
-            room.setDate(finddate());
+            room.setSubName(sub_name.getText().toString());
             room.setCode(room_code);
             //변수 받아오기
             String roomID  =room_code;
@@ -135,7 +134,6 @@ public class AddRoomActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);//여기서 menu/menu_main UI를 가져옴
         return true;
     }

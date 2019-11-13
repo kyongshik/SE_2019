@@ -2,33 +2,30 @@ package com.example.se_2019;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 public class Room implements Parcelable
 {
-    private String name;
-    private ArrayList<String> info;
-    private String date;
-    private String code;
     private String roomID;
     private String userID;
     private String roomName;
     private String subName;
-
+    private ArrayList info;
 
     public Room(String name) {
-        this.name = name;
-        info = new ArrayList<String>();
+        this.roomName = name;
+
     }
 
     protected Room(Parcel in) {
-        name = in.readString();
-        info = in.createStringArrayList();
-        date = in.readString();
-        code = in.readString();
+        roomID = in.readString();
+        userID = in.readString();
+        roomName = in.readString();
+        subName = in.readString();
     }
     public Room(String roomID, String userID, String roomName, String subName){
-        code = this.roomID;
+        roomID = this.roomID;
         userID = this.userID;
         roomName = this.roomName;
         subName  = this.subName;
@@ -39,7 +36,6 @@ public class Room implements Parcelable
         public Room createFromParcel(Parcel in) {
             return new Room(in);
         }
-
         @Override
         public Room[] newArray(int size) {
             return new Room[size];
@@ -53,50 +49,26 @@ public class Room implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeStringList(info);
-        dest.writeString(date);
-        dest.writeString(code);
+        dest.writeString(roomID);
+        dest.writeString(userID);
+        dest.writeString(roomName);
+        dest.writeString(subName);
+
     }
 
-    public String getName() {
-        return name;
+    public void setName(String roomname) {
+        this.roomName = roomname;
     }
-    public String getmenu1()
-    {
-        return info.get(0);
-    }//이것들 이름 아직 안바꿈
-    public String getmenu2()
-    {
-        return info.get(1);
-    }
-    public String getmenu3()
-    {
-        return info.get(2);
-    }
+    public void setSubName(String subname) { this.subName = subname; }
+    public void setUserID(String userid){this.userID = userid;}
+    public void setCode(String code){this.roomID = code;}
 
-    public String getDate() {
-        return date;
-    }
-    public String getcode(){return code;}
 
-    public String printmenu(){
-        String str = info.get(0) + ", " + info.get(1) + ", " +info.get(2);
-        return str;
+    public String getRoomID(){return roomID;}
+    public String getUserID(){return userID;}
+    public String getRoomName() {
+        return roomName;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setMenu(String item) {
-        info.add(item);
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-    public void setCode(String code){this.code = code;}
-
+    public String getSubName(){return subName;}
 
 }
