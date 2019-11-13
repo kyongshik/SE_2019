@@ -19,6 +19,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,21 +76,27 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);//여기까지 됨
                             boolean success = jsonObject.getBoolean("success");
                             if(success){
-//                                JSONArray jsonArray = jsonObject.getJSONArray("response");
-//                                int count=0;
-//
-//                                while(count<jsonArray.length()){
-//                                    JSONObject object = jsonArray.getJSONObject(count);
+                                JSONArray jsonArray = jsonObject.getJSONArray("response");
+                                int count=0;
+
+                                while(count<jsonArray.length()){
+                                    JSONObject object = jsonArray.getJSONObject(count);
                                     userID = jsonObject.getString("userID");
                                     roomID = jsonObject.getString("roomID");
                                     subName = jsonObject.getString("subName");
                                     roomName = jsonObject.getString("roomName");
-                                    Room room = new Room(userID, roomID, roomName, subName);
+
+                                    Room room = new Room(roomName);
+                                    room.setCode(roomID);
+                                    room.setUserID(userID);
+                                    room.setRoomName(roomName);
+                                    room.setSubName(subName);
+
                                     items.add(room.getRoomName());
                                     roomlist.add(room);
                                     adapter.notifyDataSetChanged();
-//                                    count++;
-//                                }
+                                    count++;
+                                }
                             }
                             else{
                                 Toast.makeText(getApplicationContext(), "받아온게 null인 경우인가", Toast.LENGTH_LONG).show();
@@ -113,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     public void addBtnClick(View v){
         //하단에 아이디 출력
         Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
-        //bundle로 uerID랑 room info보냄
+        //bundle로 uerID랑 room userID보냄
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("roomlist", items);
         bundle.putString("userID", userID);

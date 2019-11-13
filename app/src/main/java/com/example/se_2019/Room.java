@@ -56,7 +56,7 @@ public class Room implements Parcelable
 
     }
 
-    public void setName(String roomname) {
+    public void setRoomName(String roomname) {
         this.roomName = roomname;
     }
     public void setSubName(String subname) { this.subName = subname; }

@@ -79,14 +79,17 @@ public class AddRoomActivity extends AppCompatActivity {
         //방에 대한 정보를 리스트에 저장
         {
             //new room만들어서 사용자가 입력한 내용을 set함
-            room = new Room(room_name.getText().toString());
-            room.setSubName(sub_name.getText().toString());
-            room.setCode(room_code);
-            //변수 받아오기
             String roomID  =room_code;
             String userID =userid; //여기 바꿔줘야함
             String roomName = room_name.getText().toString();
             String subName = sub_name.getText().toString();
+
+            room = new Room(room_name.getText().toString());
+            room.setCode(roomID);
+            room.setUserID(userID);
+            room.setRoomName(roomName);
+            room.setSubName(subName);
+
             //서버에 추가하는 부분
             Response.Listener<String> responseListener = new Response.Listener<String>() {
                 @Override
