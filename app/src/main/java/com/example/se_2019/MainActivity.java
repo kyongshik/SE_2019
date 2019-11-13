@@ -73,34 +73,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONObject jsonObject = new JSONObject(response);//여기까지 됨
-                            boolean success = jsonObject.getBoolean("success");
-                            if(success){
-                                JSONArray jsonArray = jsonObject.getJSONArray("response");
-                                int count=0;
 
-                                while(count<jsonArray.length()){
-                                    JSONObject object = jsonArray.getJSONObject(count);
-                                    userID = jsonObject.getString("userID");
-                                    roomID = jsonObject.getString("roomID");
-                                    subName = jsonObject.getString("subName");
-                                    roomName = jsonObject.getString("roomName");
+                            JSONArray jsonArray= new JSONArray(response);
+                            for (int i=0; i<jsonArray.length(); i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                 userID = jsonObject.getString("userID");
+                                roomID = jsonObject.getString("roomID");
+                                subName = jsonObject.getString("subName");
+                                roomName = jsonObject.getString("roomName");
+                                Room room = new Room(roomName);
+                                room.setCode(roomID);
+                                room.setUserID(userID);
+                                room.setRoomName(roomName);
+                                room.setSubName(subName);
 
-                                    Room room = new Room(roomName);
-                                    room.setCode(roomID);
-                                    room.setUserID(userID);
-                                    room.setRoomName(roomName);
-                                    room.setSubName(subName);
-
-                                    items.add(room.getRoomName());
-                                    roomlist.add(room);
-                                    adapter.notifyDataSetChanged();
-                                    count++;
-                                }
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(), "받아온게 null인 경우인가", Toast.LENGTH_LONG).show();
-                                return;
+                                items.add(room.getRoomName());
+                                roomlist.add(room);
+                                adapter.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
