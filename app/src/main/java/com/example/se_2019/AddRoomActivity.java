@@ -64,10 +64,6 @@ public class AddRoomActivity extends AppCompatActivity {
         }
         Toast.makeText(this, "방 코드는 "+room_code+" 입니다.", Toast.LENGTH_LONG).show(); //확인용 나중에 지워야함
 
-//        tv_id = findViewById(R.id.idView);
-//        Intent intent = getIntent();
-//        userID = intent.getStringExtra("userID");
-//        tv_id.setText("userID: "+userID);
         Bundle bundle = getIntent().getExtras();
         userid = bundle.getString("userID");
 
@@ -80,7 +76,6 @@ public class AddRoomActivity extends AppCompatActivity {
         }
         else //추가 버튼을 눌렀을 때
         //방에 대한 정보를 리스트에 저장
-        //이때 서버에도 추가 시켜야함
         {
             //new room만들어서 사용자가 입력한 내용을 set함
             room = new Room(room_name.getText().toString());

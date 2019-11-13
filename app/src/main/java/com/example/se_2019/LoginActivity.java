@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText et_lid, et_lpass;
     private Button btn_login, btn_register;
 
-    //서버연동//
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
 
-        btn_register.setOnClickListener(new View.OnClickListener(){
+        btn_register.setOnClickListener(new View.OnClickListener(){ //회원가입 버튼을 눌렀을 때 회원가입 창으로 가도록
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);

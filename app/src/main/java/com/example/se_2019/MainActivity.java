@@ -1,6 +1,5 @@
 package com.example.se_2019;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,13 +7,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -28,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     final int NEW_ROOM = 22; //
     private TextView tv_id;
     String userID="";
+    String roomID="";
+    String subName="";
+    String roomName="";
+    private Button btn_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        setListView();//이건 방에 대한 코드
+        //여기서 리스트 생성..?
+        setListView();
 
         //하단에 아이디 출력
         tv_id = findViewById(R.id.idView);
@@ -48,14 +59,56 @@ public class MainActivity extends AppCompatActivity {
         userID = intent.getStringExtra("userID");
         tv_id.setText("userID: "+userID);
 
-        //가지고 있는 리스트 출력해야함
-        ////여기서부터
-//        Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
-//        intent.putExtra("roomlist", items);
-//        startActivityForResult(intent, NEW_ROOM);
+        ////여기서부터 디비에서 받아오는것 하기
+        listView = findViewById(R.id.listview);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
+        listView.setAdapter(adapter);
+        btn_list = findViewById(R.id.listbtn);
+        btn_list.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);//여기까지 됨
+                            boolean success = jsonObject.getBoolean("success");
+                            if(success){
+//                                JSONArray jsonArray = jsonObject.getJSONArray("response");
+//                                int count=0;
+//
+//                                while(count<jsonArray.length()){
+//                                    JSONObject object = jsonArray.getJSONObject(count);
+                                    userID = jsonObject.getString("userID");
+                                    roomID = jsonObject.getString("roomID");
+                                    subName = jsonObject.getString("subName");
+                                    roomName = jsonObject.getString("roomName");
+                                    Room room = new Room(userID, roomID, roomName, subName);
+                                    items.add(room.getName());
+                                    roomlist.add(room);
+                                    adapter.notifyDataSetChanged();
+//                                    count++;
+//                                }
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "받아온게 null인 경우인가", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                getRoomListRequest getRoomListRequest = new getRoomListRequest(userID,responseListener); //여기서 userID로 보내는거 같음
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                queue.add(getRoomListRequest);
+            }
+        });
+
 
     }
-    //방 추가 버튼 클릭하면 userID랑 방 정보보냄///?
+
+    //방 추가 버튼 클릭하면 userID랑 방 정보보냄//
     public void addBtnClick(View v){
         //하단에 아이디 출력
         Intent intent = new Intent(MainActivity.this, AddRoomActivity.class);
@@ -67,35 +120,12 @@ public class MainActivity extends AppCompatActivity {
 //        intent.putExtra("userID", userID);
         startActivityForResult(intent, NEW_ROOM);
     }
+
     protected void setListView() {
         listView = (ListView) findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
         listView.setAdapter(adapter);
 
-        //꾹 눌렀을때 삭제
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, final View view, final int position, long id) {
-
-                //정보를 삭제하는지 묻는 대화상자 나타남
-                AlertDialog.Builder dlg = new AlertDialog.Builder(view.getContext());
-                dlg.setTitle("삭제확인")
-
-                        .setMessage("선택한 방을 정말 삭제하시겠습니까?")
-                        .setNegativeButton("취소", null)
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //삭제 클릭시 아래꺼
-                                items.remove(position);
-                                items.remove(position);
-                                adapter.notifyDataSetChanged();
-                            }
-                        })
-                        .show();
-                return true;
-            }
-        });
         //list의 방을 클릭하면 roompost로 넘어감
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
