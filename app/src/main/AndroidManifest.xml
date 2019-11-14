@@ -11,10 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".content_notice"></activity>
+        <activity android:name=".content_search_room" />
         <activity
             android:name=".Activity.MyListAdapter"
             android:label="@string/title_activity_my_list_adapter"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>

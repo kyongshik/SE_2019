@@ -5,30 +5,25 @@
     android:layout_height="match_parent"
     tools:showIn="@layout/activity_main">
     <PreferenceCategory android:title="앱 정보">
+        <Preference
+            android:key="keyword_version"
+            android:title="앱 버전"
+            android:summary="1.1.1"
+            android:text="엡 버전"/>
 
-    <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="앱 버전"
-        android:text="엡 버전"/>
+        <Preference
 
-    <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_2"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:text="공지사항"
-        android:title="공지사항" />
+            android:key="key_notice"
+            android:text="공지사항"
+            android:title="공지사항" />
 
-     <EditTextPreference
-         android:defaultValue="Default value"
-         android:key="edit_text_preference_3"
-         android:selectAllOnFocus="true"
-         android:singleLine="true"
-         android:text="커뮤니티 이용규칙"
-         android:title="커뮤니티 이용규칙" />
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:key="edit_text_preference_3"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:text="커뮤니티 이용규칙"
+            android:title="커뮤니티 이용규칙" />
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/ringtone_alignment"
