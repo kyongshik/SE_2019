@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         //list의 방을 클릭하면 roompost로 넘어감
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Intent intent = new Intent(MainActivity.this, RoomPost.class);
+                Intent intent = new Intent(MainActivity.this, ForumActivity.class);
                 Room room = roomlist.get(position);
                 intent.putExtra("roominfo", room);
                 startActivity(intent);

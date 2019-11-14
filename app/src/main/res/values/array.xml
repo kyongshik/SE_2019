@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="카테고리">
+        <item>게시글</item>
+        <item>투표</item>
+        <item>일정</item>
+    </string-array>
+</resources>
