@@ -2,6 +2,7 @@ package com.example.se_2019;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,10 +46,22 @@ public class Login extends AppCompatActivity {
                 //edit text에 현재 입력되어있는 값을 가져온다
                 String userID = et_lid.getText().toString();
                 String userPass = et_lpass.getText().toString();
+                if(userID.toString().length() == 0 || userPass.toString().length() == 0){
+                    if(userID.toString().length() == 0){
+                        Toast.makeText(getApplicationContext(), "ID를 입력하세요", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
+                    }
+
+                    return;
+                }
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
                         try {
+                            Log.i("STORE","내말이들리니..."+response);
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if(success){

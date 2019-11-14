@@ -5,13 +5,10 @@
     android:layout_height="match_parent"
     tools:showIn="@layout/activity_main">
     <PreferenceCategory android:title="앱 정보">
-
-    <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
+    <Preference
+        android:key="keyword_version"
         android:title="앱 버전"
+        android:summary="1.1.1"
         android:text="엡 버전"/>
 
     <EditTextPreference

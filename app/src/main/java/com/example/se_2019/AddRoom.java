@@ -2,12 +2,17 @@ package com.example.se_2019;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,6 +23,7 @@ public class AddRoom extends AppCompatActivity {
     EditText etname,subject_name,prof_name,subject_time;
     String code="";
     Room room;
+    Button btn_search ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,7 @@ public class AddRoom extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         etname = (EditText)findViewById(R.id.etname);
         subject_name = (EditText)findViewById(R.id.subject_name);
@@ -56,7 +63,45 @@ public class AddRoom extends AppCompatActivity {
             count--;
         }
         Toast.makeText(this, "방 코드는 "+code+" 입니다.", Toast.LENGTH_LONG).show(); //확인용 나중에 지워야함
+        btn_search = findViewById(R.id.btn_searchFor_add);
+        Log.i("STORE","이거 이상하다");
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddRoom.this);
 
+                View view = LayoutInflater.from(AddRoom.this).inflate(R.layout.content_search_room, null, false);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+
+
+                final TextView textRoomcode = (TextView) view.findViewById(R.id.et_roomcode) ;
+                final Button btn_roomSearch = (Button) view.findViewById(R.id.btn_add_room_search);
+                final Button btn_roomCancel = (Button) view.findViewById(R.id.btn_cancel);
+                textRoomcode.setText(code);
+
+
+                btn_roomSearch.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                btn_roomCancel.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                    Log.i("WHY",code);
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
+
+            }
+        });
 
 
     }

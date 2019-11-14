@@ -3,6 +3,7 @@ package com.example.se_2019;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import android.content.SharedPreferences;
@@ -16,7 +17,6 @@ public class Preferences extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-
 
         //setContentView(R.layout.activity_preferences);
 
