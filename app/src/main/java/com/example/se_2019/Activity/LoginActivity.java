@@ -1,4 +1,4 @@
-package com.example.se_2019;
+package com.example.se_2019.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.se_2019.DBRequest.LoginRequest;
+import com.example.se_2019.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

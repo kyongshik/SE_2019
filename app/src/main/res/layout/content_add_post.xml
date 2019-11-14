@@ -1,6 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/activity_write"
+    tools:context = ".Activity.AddPostActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="411dp">
+
+        <LinearLayout
+            android:id="@+id/post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/date_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:id="@+id/title_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/content_post"
+                android:layout_width="400dp"
+                android:layout_height="330dp"
+                android:layout_margin="5dp"
+                android:background="@null"
+                android:gravity="top|start" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vote"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+            <LinearLayout
+                android:id="@+id/vote_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/date_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp" />
+
+                <EditText
+                    android:id="@+id/title_vote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/content_vote"
+                    android:layout_width="400dp"
+                    android:layout_height="49dp"
+                    android:layout_margin="5dp"
+                    android:background="@null"
+                    android:gravity="top|start" />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/inputstr"
+                    android:layout_width="335dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+
+                <Button
+                    android:id="@+id/OkBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="OK"
+                    android:visibility="gone"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/AddBox"
+                    android:text="Add List"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp" />
+                <Button
+                    android:id="@+id/Set"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="선택"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/calendar"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <CalendarView
+                android:id="@+id/calendarview"
+                android:layout_width="400dp"
+                android:layout_height="220dp" />
+
+            <EditText
+                android:id="@+id/title_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/date_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
+
+            <EditText
+                android:id="@+id/content_calendar"
+                android:layout_width="400dp"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@null" />
+            <!--<CalendarView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0px"-->
+            <!--android:layout_weight="1"-->
+            <!--android:minDate="01/01/2019"-->
+
+            <!--android:maxDate="12/31/2019"-->
+            <!--android:focusedMonthDateColor="#ff0000"-->
+            <!--android:unfocusedMonthDateColor="#0000ff"-->
+
+            <!--android:selectedWeekBackgroundColor="#ffff00"-->
+            <!--android:showWeekNumber="false"-->
+            <!--android:weekSeparatorLineColor="#00ff00"-->
+            <!--/>-->
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="카테고리 선택"
+            android:textColor="#ffaa66" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/category"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp"
+            android:entries="@array/카테고리"
+            android:spinnerMode="dropdown" />
+
+
+        <TextView
+            android:id="@+id/textView_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="55dp"
+            android:text="Save"/>
+
+
+    </RelativeLayout>
 </LinearLayout>
+
+
+
+

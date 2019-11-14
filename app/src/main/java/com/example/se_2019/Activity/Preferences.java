@@ -1,14 +1,9 @@
-package com.example.se_2019;
+package com.example.se_2019.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceManager;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
+
+import com.example.se_2019.R;
 
 public class Preferences extends PreferenceActivity {
 
