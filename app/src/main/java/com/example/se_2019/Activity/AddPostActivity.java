@@ -1,7 +1,10 @@
-package com.example.se_2019;
+package com.example.se_2019.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -14,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.se_2019.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -199,6 +204,38 @@ public class AddPostActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
+
+
+
+
+    //TOOLBAR설정
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);//여기서 e/menu_main UI를 가져옴
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+        }
+        if (id == R.id.toolbar_alarm) {
+            Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+        }
+        if (id == R.id.toolbar_profile) {
+            Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            // SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
+            Intent intent = new Intent(this, Preferences.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }
 

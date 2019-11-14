@@ -1,4 +1,4 @@
-package com.example.se_2019;
+package com.example.se_2019.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.se_2019.R;
+import com.example.se_2019.Room;
+import com.example.se_2019.DBRequest.getRoomListRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
