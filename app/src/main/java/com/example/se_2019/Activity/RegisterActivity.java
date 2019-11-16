@@ -61,9 +61,9 @@ public class RegisterActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if (success) { //회원등록에 성공한 경우
-                                Toast.makeText(getApplicationContext(), "ID중복", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "ID가 중복되었습니다.", Toast.LENGTH_LONG).show();
                             } else { //회원등록에 실패한 경우
-                                Toast.makeText(getApplicationContext(), "ID중복아님", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "중복된 ID가 아닙니다.", Toast.LENGTH_LONG).show();
                                 return;
                             }
                         } catch (JSONException e) {
