@@ -132,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ForumActivity.class);
                 Room room = roomlist.get(position);
-                intent.putExtra("roominfo", room);
+                intent.putExtra("room_code", room.getRoomID());
+                intent.putExtra("room_name",room.getRoomName());
                 startActivity(intent);
             }
         });

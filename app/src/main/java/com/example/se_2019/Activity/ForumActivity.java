@@ -2,11 +2,13 @@ package com.example.se_2019.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,11 +37,29 @@ public class ForumActivity extends AppCompatActivity {
     ArrayList<Schedule> callist = new ArrayList<>();
     ArrayList<Vote> votelist = new ArrayList<>();
 
+    String roomCode,roomName;
+    TextView room_name,room_code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum);
+        //상단 정보
+
+        final Intent intent_roominfo= getIntent();
+
+        roomCode = intent_roominfo.getExtras().getString("room_code");
+        roomName = intent_roominfo.getExtras().getString("room_name");
+        Log.i("WHY","룸코드가 넘어가냐"+roomCode);
+
+
+        room_name = findViewById(R.id.et_roomName);
+        room_name.setText(roomName);
+
+        room_code = findViewById(R.id.et_Code);
+        room_code.setText(roomCode);
+
+
         //툴바
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
