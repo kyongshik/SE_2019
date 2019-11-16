@@ -10,12 +10,70 @@
 
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="413dp"
+        android:layout_height="99dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        tools:ignore="MissingConstraints">
 
+        <LinearLayout
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="  방 이름 = "
+                android:textColor="#45555f"
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/et_roomName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="2dp"
+                android:text="10:00-11:00"
+                android:textColor="#58585a"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="2dp"
+                android:text="  방 코드 = "
+                android:textColor="#45555f"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/et_Code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="2dp"
+                android:text="10:00-11:00"
+                android:textColor="#58585a"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/my_listview"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -27,7 +85,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        android:layout_weight="1"
+
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
