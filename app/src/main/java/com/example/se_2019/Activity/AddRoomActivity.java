@@ -92,8 +92,6 @@ public class AddRoomActivity extends AppCompatActivity {
 
                 SearchView search = (SearchView)findViewById(R.id.searchView);
                 text = search.getQuery().toString();
-                Log.i("WHY","잘 나오고 있니? "+text);
-
 
                 builder.setView(view);
                 final AlertDialog dialog = builder.create();
@@ -206,7 +204,10 @@ public class AddRoomActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AddRoomActivity.this, MainActivity.class);
+            finish();
+            //이때 사용자 아이디 넘겨야함
+            startActivity(intent);
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
