@@ -41,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
     String subName = "";
     String roomName = "";
     private Button btn_list;
+    //////////////////////////
+    private MyAsyncTask myAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ///////////////////////
+        myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute("","","");
+
         //툴바
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
