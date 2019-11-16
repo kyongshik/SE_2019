@@ -3,6 +3,8 @@ package com.example.se_2019.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.se_2019.Note;
 import com.example.se_2019.R;
@@ -56,10 +59,19 @@ public class AddPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_add_post);
+        setContentView(R.layout.activity_add_post);
         final TextView textView = findViewById(R.id.textView_spinner);
         Spinner spinner = findViewById(R.id.spinner);
         //스피너 선택
+
+        //툴바
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //왼쪽에 home버튼 추가
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -158,6 +170,7 @@ public class AddPostActivity extends AppCompatActivity {
                                     input.setText("");
                                 }
                             };
+                            /////////
                             Okbtn.setOnClickListener(mClickListener2);
                             //투표 리스트 추가하여 생성
                             Vote vote = new Vote(user, strDate, titles, contents, chkList);
@@ -383,6 +396,32 @@ public class AddPostActivity extends AppCompatActivity {
 
         });
     }
+    //TOOLBAR설정
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);//여기서 e/menu_main UI를 가져옴
+        return true;
+    }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+
+        }
+        if (id == R.id.toolbar_alarm) {
+            Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+        }
+        if (id == R.id.toolbar_profile) {
+            Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            // SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
+            Intent intent = new Intent(this, Preferences.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
