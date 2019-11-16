@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class AddRoomActivity extends AppCompatActivity {
     String room_code="";
     Room room;
     String userid="";
+    String text;
 
     Button btn_search;
 
@@ -87,6 +89,12 @@ public class AddRoomActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddRoomActivity.this);
 
                 View view = LayoutInflater.from(AddRoomActivity.this).inflate(R.layout.content_search_room, null, false);
+
+                SearchView search = (SearchView)findViewById(R.id.searchView);
+                text = search.getQuery().toString();
+                Log.i("WHY","잘 나오고 있니? "+text);
+
+
                 builder.setView(view);
                 final AlertDialog dialog = builder.create();
 
@@ -94,7 +102,7 @@ public class AddRoomActivity extends AppCompatActivity {
                 final TextView textRoomcode = (TextView) view.findViewById(R.id.et_roomcode) ;
                 final Button btn_roomSearch = (Button) view.findViewById(R.id.btn_add_room_search);
                 final Button btn_roomCancel = (Button) view.findViewById(R.id.btn_cancel);
-                textRoomcode.setText(room_code);
+                textRoomcode.setText(text);
 
 
                 btn_roomSearch.setOnClickListener(new View.OnClickListener() {
