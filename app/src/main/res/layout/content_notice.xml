@@ -23,6 +23,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <ListView
         android:id="@+id/listview_notice"
         android:layout_width="409dp"

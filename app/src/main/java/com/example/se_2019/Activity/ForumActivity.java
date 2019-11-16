@@ -42,7 +42,7 @@ public class ForumActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//이 밑은 메뉴
+////이 밑은 메뉴
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
