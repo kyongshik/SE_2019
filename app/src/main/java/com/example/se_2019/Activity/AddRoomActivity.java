@@ -35,6 +35,10 @@ public class AddRoomActivity extends AppCompatActivity {
     Room room;
     String userid="";
 
+<<<<<<< Updated upstream
+=======
+    Button btn_search;
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,8 @@ public class AddRoomActivity extends AppCompatActivity {
         room_name = (EditText)findViewById(R.id.etname);
         sub_name = (EditText)findViewById(R.id.subject_name);
 
+
+        btn_search = findViewById(R.id.search_btn);
 
         //방코드는 방 생성시 미리 정해줌
         int count=8;
@@ -77,6 +83,44 @@ public class AddRoomActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         userid = bundle.getString("userID");
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddRoomActivity.this);
+
+                View view = LayoutInflater.from(AddRoomActivity.this).inflate(R.layout.content_search_room, null, false);
+                builder.setView(view);
+                final AlertDialog dialog = builder.create();
+
+
+                final TextView textRoomcode = (TextView) view.findViewById(R.id.et_roomcode) ;
+                final Button btn_roomSearch = (Button) view.findViewById(R.id.btn_add_room_search);
+                final Button btn_roomCancel = (Button) view.findViewById(R.id.btn_cancel);
+                textRoomcode.setText(room_code);
+
+
+                btn_roomSearch.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                btn_roomCancel.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
+
+
+            }
+        });
 
 
     }
