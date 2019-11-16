@@ -12,6 +12,7 @@ public class Note implements Parcelable{
     private String date;
     private String title;
     private String content;
+    private int posi = 0;
 
 
 
@@ -20,6 +21,7 @@ public class Note implements Parcelable{
         this.date = date;
         this.title = title;
         this.content = content;
+        this.posi = 0;
     }
 
     protected Note(Parcel in){
@@ -27,6 +29,7 @@ public class Note implements Parcelable{
         date = in.readString();
         title = in.readString();
         content = in.readString();
+        posi = 0;
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -53,6 +56,10 @@ public class Note implements Parcelable{
         dest.writeString(date);
         dest.writeString(title);
         dest.writeString(content);
+    }
+
+    public int getPosi() {
+        return posi;
     }
 
     public String getName() {

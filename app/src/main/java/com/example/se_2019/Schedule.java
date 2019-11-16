@@ -10,6 +10,7 @@ public class Schedule implements Parcelable{
     private String date;
     private String title;
     private String content;
+    private int posi = 2;
 
 
 
@@ -18,6 +19,7 @@ public class Schedule implements Parcelable{
         this.date = date;
         this.title = title;
         this.content = content;
+        posi = 2;
     }
 
     protected Schedule(Parcel in){
@@ -25,6 +27,7 @@ public class Schedule implements Parcelable{
         date = in.readString();
         title = in.readString();
         content = in.readString();
+        posi = 2;
     }
 
 
@@ -54,6 +57,12 @@ public class Schedule implements Parcelable{
         dest.writeString(title);
         dest.writeString(content);
     }
+
+
+    public int getPosi() {
+        return posi;
+    }
+
 
     public String getName() {
         return name;
@@ -91,4 +100,3 @@ public class Schedule implements Parcelable{
 
 
 }
-
