@@ -35,10 +35,7 @@ public class AddRoomActivity extends AppCompatActivity {
     Room room;
     String userid="";
 
-<<<<<<< Updated upstream
-=======
     Button btn_search;
->>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
