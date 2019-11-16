@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.se_2019"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="29" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label=""
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.example.se_2019.content_notice" />
+        <activity android:name="com.example.se_2019.content_search_room" />
+        <activity
+            android:name="com.example.se_2019.Activity.MyListAdapter"
+            android:label="@string/title_activity_my_list_adapter"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.se_2019.Activity.RegisterActivity" />
+        <activity android:name="com.example.se_2019.Activity.LoginActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.se_2019.Activity.AddPostActivity" />
+        <activity
+            android:name="com.example.se_2019.Activity.AddRoomActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.ADDROOM" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.se_2019.Activity.ForumActivity" />
+        <activity
+            android:name="com.example.se_2019.Activity.MainActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.example.se_2019.Activity.Preferences" />
+    </application>
+
+</manifest>
