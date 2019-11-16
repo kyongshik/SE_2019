@@ -92,4 +92,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
     });
     }
+    public int check(){
+
+        return 0;
+    }
 }
