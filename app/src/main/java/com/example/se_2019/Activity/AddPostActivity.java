@@ -1,6 +1,9 @@
 package com.example.se_2019.Activity;
 
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -50,6 +53,10 @@ public class AddPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_post);
         final TextView textView = findViewById(R.id.textView_spinner);
         Spinner spinner = findViewById(R.id.spinner);
+
+
+
+
 
 //        //날짜 시간 받아오기
 //        date = new Date();
@@ -204,6 +211,8 @@ public class AddPostActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
+
+
 
 
 
