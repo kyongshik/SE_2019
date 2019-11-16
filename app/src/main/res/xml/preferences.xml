@@ -17,11 +17,8 @@
             android:text="공지사항"
             android:title="공지사항" />
 
-        <EditTextPreference
-            android:defaultValue="Default value"
-            android:key="edit_text_preference_3"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
+        <Preference
+            android:key="key_rule"
             android:text="커뮤니티 이용규칙"
             android:title="커뮤니티 이용규칙" />
         <ListPreference
