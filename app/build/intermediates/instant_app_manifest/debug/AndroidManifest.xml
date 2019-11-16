@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.se_2019.Content_Rules" />
         <activity android:name="com.example.se_2019.content_notice" />
         <activity android:name="com.example.se_2019.content_search_room" />
         <activity

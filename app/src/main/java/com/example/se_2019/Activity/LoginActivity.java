@@ -74,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
                                 return;
                             }
+                            et_lid.setText("");
+                            et_lpass.setText("");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
