@@ -40,6 +40,8 @@ public class ForumActivity extends AppCompatActivity {
     String roomCode,roomName;
     TextView room_name,room_code;
 
+    //상단바 홈버튼 처리
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,8 @@ public class ForumActivity extends AppCompatActivity {
 
         room_code = findViewById(R.id.et_Code);
         room_code.setText(roomCode);
+
+        userID = intent_roominfo.getExtras().getString("userID");
 
 
         //툴바
@@ -143,6 +147,9 @@ public class ForumActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,MainActivity.class);
+            intent.putExtra("userID",userID);
+            startActivity(intent);
 
         }
         if (id == R.id.toolbar_alarm) {
@@ -152,6 +159,7 @@ public class ForumActivity extends AppCompatActivity {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
             // SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
             Intent intent = new Intent(this, Preferences.class);
+            intent.putExtra("userID",userID);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

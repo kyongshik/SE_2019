@@ -36,6 +36,7 @@ public class AddRoomActivity extends AppCompatActivity {
     Room room;
     String userid="";
     String text;
+    String userID; //intent로 넘어오는 id
 
     Button btn_search;
 
@@ -54,6 +55,8 @@ public class AddRoomActivity extends AppCompatActivity {
         room_name = (EditText)findViewById(R.id.etname);
         sub_name = (EditText)findViewById(R.id.subject_name);
 
+        final Intent intent_Add = getIntent();
+        userID = intent_Add.getExtras().getString("userID");
 
         btn_search = findViewById(R.id.search_btn);
 
@@ -204,9 +207,9 @@ public class AddRoomActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            Intent intent = new Intent(AddRoomActivity.this, MainActivity.class);
-            finish();
-            //이때 사용자 아이디 넘겨야함
+            Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID", userID);
             startActivity(intent);
         }
         if (id == R.id.toolbar_alarm) {
@@ -216,6 +219,7 @@ public class AddRoomActivity extends AppCompatActivity {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
             // SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
             Intent intent = new Intent(this, Preferences.class);
+            intent.putExtra("userID",userID);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

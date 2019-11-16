@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -15,8 +19,14 @@ import com.example.se_2019.content_notice;
 
 public class Preferences extends PreferenceActivity {
     Preference preference_notice, preference_rule, preference_logout;
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //상단바 처리를 위한 코드
+        final Intent intent_pre = getIntent();
+        userID = intent_pre.getExtras().getString("userID");
+        Log.i("PRE","여기들어요냐");
+
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         //Log.i("WHY",);
@@ -25,6 +35,7 @@ public class Preferences extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent intent = new Intent(Preferences.this, content_notice.class);
+                intent.putExtra("userID",userID);
                 startActivity(intent);
                 return true;
             }
@@ -34,6 +45,7 @@ public class Preferences extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Intent intent = new Intent(Preferences.this, Content_Rules.class);
+                intent.putExtra("userID",userID);
                 startActivity(intent);
                 return true;
             }
@@ -66,6 +78,34 @@ public class Preferences extends PreferenceActivity {
         });
         //setContentView(R.layout.activity_preferences);
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);//여기서 e/menu_main UI를 가져옴
+        return true;
+    }
+    public boolean onOptionsItemSelected (MenuItem item){
+
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID",userID);
+            finish();
+            //이때 사용자 아이디 넘겨야함
+            startActivity(intent);
+        }
+        if (id == R.id.toolbar_alarm) {
+            Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+        }
+        if (id == R.id.toolbar_profile) {
+            Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            // SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
+            Intent intent = new Intent(this, Preferences.class);
+            intent.putExtra("userID",userID);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

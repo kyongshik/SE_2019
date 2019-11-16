@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 Room room = roomlist.get(position);
                 intent.putExtra("room_code", room.getRoomID());
                 intent.putExtra("room_name",room.getRoomName());
+                intent.putExtra("userID",userID);
                 startActivity(intent);
             }
         });
@@ -168,7 +169,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(this,MainActivity.class);
+            intent.putExtra("userID",userID);
+            startActivity(intent);
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
@@ -177,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
             // SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
             Intent intent = new Intent(this, Preferences.class);
+            intent.putExtra("userID",userID);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
