@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".content_notice"></activity>
+        <activity android:name=".Content_Rules"></activity>
+        <activity android:name=".content_notice" />
         <activity android:name=".content_search_room" />
         <activity
             android:name=".Activity.MyListAdapter"
