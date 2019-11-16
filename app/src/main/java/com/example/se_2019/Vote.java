@@ -12,6 +12,7 @@ public class Vote implements  Parcelable{
     private String title;
     private String content;
     private ArrayList<CheckBox> chklist;
+    private int posi = 1;
 
 
 
@@ -21,6 +22,7 @@ public class Vote implements  Parcelable{
         this.title = title;
         this.content = content;
         this.chklist = chklist;
+        posi = 1;
     }
 
     protected Vote(Parcel in){
@@ -29,6 +31,7 @@ public class Vote implements  Parcelable{
         title = in.readString();
         content = in.readString();
         chklist = in.createTypedArrayList(chkCREATOR);
+        posi = 1;
     }
 
 
@@ -73,7 +76,48 @@ public class Vote implements  Parcelable{
         dest.createTypedArrayList(chkCREATOR);
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getDate() {
+        return date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public ArrayList<CheckBox> getChklist() {
+        return chklist;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setChklist(ArrayList<CheckBox> chklist) {
+        this.chklist = chklist;
+    }
+
+    public int getPosi() {
+        return posi;
+    }
 
 }
-

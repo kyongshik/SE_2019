@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.se_2019.Note;
 import com.example.se_2019.R;
+import com.example.se_2019.Schedule;
+import com.example.se_2019.Vote;
 
 import java.util.ArrayList;
 
@@ -26,7 +28,8 @@ public class ForumActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ArrayList<String> list = new ArrayList<>(); //제목 가져올 리스트
     ArrayList<Note> postlist = new ArrayList<>();
-
+    ArrayList<Schedule> callist = new ArrayList<>();
+    ArrayList<Vote> votelist = new ArrayList<>();
 
 
     @Override
@@ -46,10 +49,10 @@ public class ForumActivity extends AppCompatActivity {
 
     }
 
-    protected void setListView(){
+    protected void setListView() {
         listView = findViewById(R.id.my_listview);
 
-        if(list != null){
+        if (list != null) {
             adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
             listView.setAdapter(adapter);
         }
@@ -62,19 +65,25 @@ public class ForumActivity extends AppCompatActivity {
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == NEW_POST)
-        {
-            if(resultCode == RESULT_OK){
-//                Intent intent = data;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == NEW_POST) {
+            if (resultCode == 0) {
                 Note n = data.getParcelableExtra("postinfo");
-
-                // list.add(n.getTitle());//여기서 리스트 맨앞으로 넣는걸로 바꾸면됨
-                list.add(0,n.getTitle());//여기서 리스트 맨앞으로 넣는걸로 바꾸면됨
+                list.add(0, "[게시글]  " + n.getTitle() + "\n" + n.getName() + "\t\t" + n.getDate());
                 postlist.add(n);
-//                list_itemArrayList.add(n);
                 adapter.notifyDataSetChanged();
-                // myListAdapter.notifyDataSetChanged();
+            }
+            if (resultCode == 1) {
+                Vote v = data.getParcelableExtra("voteinfo");
+                list.add(0,"[투표]  " + v.getTitle() + "\n" + v.getName() + "\t\t" + v.getDate());
+                votelist.add(v);
+                adapter.notifyDataSetChanged();
+            }
+            if (resultCode == 2) {
+                Schedule s = data.getParcelableExtra("calinfo");
+                list.add(0, "[일정]  " + s.getTitle() + "\n" + s.getName() + "\t\t" + s.getDate());
+                callist.add(s);
+                adapter.notifyDataSetChanged();
             }
 
         }
@@ -82,9 +91,9 @@ public class ForumActivity extends AppCompatActivity {
     }
 
 
-    public void writeClick(View view){
+    public void writeClick(View view) {
         Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
-        intent.putExtra("postinfo",postlist);
+        intent.putExtra("postinfo", postlist);
         startActivityForResult(intent, NEW_POST);
     }
 
