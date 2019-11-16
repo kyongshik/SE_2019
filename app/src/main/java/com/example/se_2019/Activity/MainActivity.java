@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
