@@ -5,22 +5,14 @@
     android:layout_height="match_parent"
     tools:showIn="@layout/activity_main">
     <PreferenceCategory android:title="앱 정보">
-<<<<<<< HEAD
-        <Preference
-            android:key="keyword_version"
-            android:title="앱 버전"
-            android:summary="1.1.1"
-            android:text="엡 버전"/>
 
-        <Preference
-=======
     <Preference
         android:key="keyword_version"
         android:title="앱 버전"
         android:summary="1.1.1"
         android:text="엡 버전"/>
->>>>>>> fd53f5393c6d31648970a57909ae6218567d0d0c
 
+        <Preference
             android:key="key_notice"
             android:text="공지사항"
             android:title="공지사항" />

@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity android:name=".content_notice"></activity>
         <activity android:name=".content_search_room" />
         <activity
@@ -20,11 +19,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginActivity">
-=======
-        <activity android:name=".content_search_room"></activity>
-        <activity android:name=".Register" />
-        <activity android:name=".Login">
->>>>>>> fd53f5393c6d31648970a57909ae6218567d0d0c
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,13 +40,8 @@
         <activity
             android:name=".Activity.MainActivity"
             android:label=""
-<<<<<<< HEAD
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.Preferences" />
-=======
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Preferences" />
->>>>>>> fd53f5393c6d31648970a57909ae6218567d0d0c
     </application>
 
 </manifest>
