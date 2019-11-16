@@ -5,9 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context = ".Activity.AddPostActivity"
+    tools:showIn="@layout/activity_add_post"
     android:orientation="vertical"
     android:id="@+id/activity_write"
-    tools:context = ".Activity.AddPostActivity">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
