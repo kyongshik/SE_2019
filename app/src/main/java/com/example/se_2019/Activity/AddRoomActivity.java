@@ -2,7 +2,6 @@ package com.example.se_2019.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,37 +20,41 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.se_2019.DBRequest.AddRoomRequest;
+import com.example.se_2019.DBRequest.AddSearchRoomRequest;
+import com.example.se_2019.DBRequest.SearchRoomRequest;
 import com.example.se_2019.R;
 import com.example.se_2019.Room;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AddRoomActivity extends AppCompatActivity {
-    EditText room_name,sub_name; //userid 넣어야됨ㅠㅠ
+    EditText room_name,sub_name;
     String room_code="";
     Room room;
     String userid="";
     String text;
     String userID; //intent로 넘어오는 id
-
     Button btn_search;
+    ArrayList<Room> roomlist = new ArrayList<Room>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_room);
-        //상단바
+        /////상단바
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //왼쪽에 home버튼 추가
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        /////
         room_name = (EditText)findViewById(R.id.etname);
         sub_name = (EditText)findViewById(R.id.subject_name);
 
@@ -83,53 +86,119 @@ public class AddRoomActivity extends AppCompatActivity {
 
         Toast.makeText(this, "방 코드는 "+room_code+" 입니다.", Toast.LENGTH_LONG).show(); //확인용 나중에 지워야함
 
+
+        //방 정보들을 가져오기
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        String roomID = jsonObject.getString("roomID");
+                        String subName = jsonObject.getString("subName");
+                        String roomName = jsonObject.getString("roomName");
+                        Room room = new Room(roomName);
+                        room.setCode(roomID);
+                        room.setUserID(userID);
+                        room.setRoomName(roomName);
+                        room.setSubName(subName);
+                        roomlist.add(room);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        SearchRoomRequest searchroomRequest = new SearchRoomRequest( responseListener); //여기서 userID로 보내는거 같음
+        RequestQueue queue = Volley.newRequestQueue(AddRoomActivity.this);
+        queue.add(searchroomRequest);
+
+
+        //검색 버튼을 눌렀을 때 팝업창
         Bundle bundle = getIntent().getExtras();
         userid = bundle.getString("userID");
-
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddRoomActivity.this);
-
                 View view = LayoutInflater.from(AddRoomActivity.this).inflate(R.layout.content_search_room, null, false);
-
                 SearchView search = (SearchView)findViewById(R.id.searchView);
                 text = search.getQuery().toString();
+                //여기 text가 사용자가 입력한 방코드
 
                 builder.setView(view);
                 final AlertDialog dialog = builder.create();
-
-
                 final TextView textRoomcode = (TextView) view.findViewById(R.id.et_roomcode) ;
                 final Button btn_roomSearch = (Button) view.findViewById(R.id.btn_add_room_search);
                 final Button btn_roomCancel = (Button) view.findViewById(R.id.btn_cancel);
                 textRoomcode.setText(text);
 
-
+                //확인 버튼을 눌렀을때
                 btn_roomSearch.setOnClickListener(new View.OnClickListener() {
-
+                    //디비에서 해당 룸 코드를 찾아 있으면 사용자 아이디에 추가시키고 아니면 해당 룸코드가 없다고 toast 메시지 띄워야힘
                     @Override
                     public void onClick(View v) {
-
+                        String searchroomID="";
+                        String searchsubName="";
+                        String searchroomName="";
+                        for(int i=0; i<roomlist.size();i++){
+                            if(text.equals(roomlist.get(i).getRoomID())){ //만약 같은 방이 있다면 방에 해당되는 데이터 저장
+                                searchroomID= roomlist.get(i).getRoomID();
+                                searchsubName= roomlist.get(i).getSubName();
+                                searchroomName= roomlist.get(i).getRoomName();
+                                break;
+                            }
+                        }
+                        if(searchroomID!=""){
+                            Response.Listener<String> responseListener = new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        JSONObject jsonObject2 = new JSONObject(response);
+                                        boolean successadd= jsonObject2.getBoolean("successadd");
+                                        if (successadd) { //회원등록에 성공한 경우
+                                            Intent intent = new Intent(AddRoomActivity.this, MainActivity.class);
+                                            intent.putExtra("userID", userID);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "서버에 올라가지 않았어요", Toast.LENGTH_LONG).show();
+                                            return;
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            };
+                            AddSearchRoomRequest addsearchroomRequest = new AddSearchRoomRequest(searchroomID, userID, searchroomName, searchsubName, responseListener);
+                            RequestQueue queue = Volley.newRequestQueue(AddRoomActivity.this);
+                            queue.add(addsearchroomRequest);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "입력하신 방이 존재하지않습니다. 다시 입력해주세요:)", Toast.LENGTH_LONG).show();
+                            finish();
+                            return;
+                        }
                     }
                 });
+                //취소 버튼을 눌렀을때
                 btn_roomCancel.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
                     }
                 });
-
                 dialog.show();
-
-
-
             }
         });
 
 
     }
+
+
     public void onClick(View v)
     {
         if (v.getId() == R.id.btnCancel){

@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("roomlist", items);
         bundle.putString("userID", userID);
+
         intent.putExtras(bundle);
 //        intent.putExtra("userID", userID);
         startActivityForResult(intent, NEW_ROOM);
