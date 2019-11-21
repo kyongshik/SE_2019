@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MyListAdapter">
+    tools:context=".Activity.ReadPostActivity"
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -20,7 +21,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_my_list_adapter" />
-
+    <include layout="@layout/content_read_post" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
