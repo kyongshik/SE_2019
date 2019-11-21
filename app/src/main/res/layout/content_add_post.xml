@@ -111,11 +111,11 @@
                     android:text="Add List"
                     android:layout_width="100dp"
                     android:layout_height="50dp" />
-                <Button
-                    android:id="@+id/Set"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:text="선택"/>
+                <!--                <Button-->
+                <!--                    android:id="@+id/Set"-->
+                <!--                    android:layout_width="100dp"-->
+                <!--                    android:layout_height="50dp"-->
+                <!--                    android:text="선택"/>-->
             </LinearLayout>
 
 

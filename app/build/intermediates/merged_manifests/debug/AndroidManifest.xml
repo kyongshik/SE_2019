@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.se_2019.Activity.ReadPostActivity"
+            android:label="@string/title_activity_read_post"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.se_2019.Content_Rules" />
         <activity android:name="com.example.se_2019.content_notice" />
         <activity android:name="com.example.se_2019.content_search_room" />
