@@ -30,9 +30,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<String> items = new ArrayList<String>(); //이게 방 이름
     ArrayAdapter<String> adapter;
-    ArrayList<Room> roomlist = new ArrayList<Room>();
+    ArrayList<Room> roomlist = new ArrayList<Room>(); //방 리스트
     ListView listView;
     final int NEW_ROOM = 22;
     private TextView tv_id;

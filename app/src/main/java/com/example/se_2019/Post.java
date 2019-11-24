@@ -1,8 +1,11 @@
 package com.example.se_2019;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Post {
+public class Post implements Parcelable{
     //목록에 띄워질 수 있게 만든 클래스
     private String name;
     private String write_date;
@@ -14,12 +17,20 @@ public class Post {
     private int num;
 ///전체 총괄할 수 있게 만들기
 
-
-
     public String getName() {
         return name;
     }
+    protected Post(Parcel in){
+        name = in.readString();
+        write_date = in.readString();
+        title = in.readString();
+        content = in.readString();
+        chklist = in.createStringArrayList();
+        Dday = in.readString();
+        posi = in.readInt();
+        num = in.readInt();
 
+    }
     public Post(String name, String write_date, String title, String content, ArrayList<String> chklist, String Dday, int posi, int num) {
         this.name = name;
         this.write_date = write_date;
@@ -30,7 +41,35 @@ public class Post {
         this.posi = posi;
         this.num = num;
     }
+    public static final Parcelable.Creator<Post> CREATOR = new Parcelable.Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
 
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(write_date);
+        dest.writeString(title);
+        dest.writeString(content);
+        dest.writeStringList(chklist);
+        dest.writeString(Dday);
+        dest.writeInt(posi);
+        dest.writeInt(num);
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -51,10 +90,10 @@ public class Post {
         this.write_date = write_date;
     }
 
-
     public int getNum() {
         return num;
     }
+    public int getPosi() {return posi;}
     public String getContent() {
         return content;
     }
