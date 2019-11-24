@@ -87,7 +87,7 @@ public class AddRoomActivity extends AppCompatActivity {
         Toast.makeText(this, "방 코드는 "+room_code+" 입니다.", Toast.LENGTH_LONG).show(); //확인용 나중에 지워야함
 
 
-        //방 정보들을 가져오기
+        //방 정보들을 가져오기 //검색
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
