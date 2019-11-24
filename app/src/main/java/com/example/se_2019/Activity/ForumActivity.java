@@ -14,11 +14,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.example.se_2019.DBRequest.getPostListRequest;
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
 import com.example.se_2019.R;
 import com.example.se_2019.Schedule;
 import com.example.se_2019.Vote;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -38,10 +46,11 @@ public class ForumActivity extends AppCompatActivity {
     ArrayList<Schedule> callist = new ArrayList<>();
     ArrayList<Vote> votelist = new ArrayList<>();
 
-
     String roomCode,roomName;
     TextView room_name,room_code;
-    String userID;
+    String userID, json_user, json_name, json_write_date, json_title;
+    String json_content, json_chklist, json_Dday;
+    int json_posi, json_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +81,60 @@ public class ForumActivity extends AppCompatActivity {
         listClick();
         list_itemArrayList = new ArrayList<Post>();
 
+        // 디비에서 roomcode에 해당하는 리스트 받아오는 작업
+
+        listView = findViewById(R.id.my_listview);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        listView.setAdapter(adapter);
+        //사용자에게 해당되는 게시글 리스트를 불러옴 (roomcode에 따른 게시물 리스트)
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        roomCode = jsonObject.getString("roomID");
+                        json_name = jsonObject.getString("name");
+                        json_write_date = jsonObject.getString("write_date");
+                        json_title = jsonObject.getString("title");
+                        json_content = jsonObject.getString("content");
+                        json_chklist = jsonObject.getString("chklist");
+                        json_Dday = jsonObject.getString("Dday");
+                        json_posi = Integer.parseInt(jsonObject.getString("posi"));
+                        json_num = Integer.parseInt(jsonObject.getString("num"));
+                        Post post = new Post(json_name, json_write_date, json_title,
+                                json_content, null, json_Dday, json_posi, json_num);
+                        if(post.getPosi()==0) {
+                            list.add("[게시글]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
+                            //근데 이거 노트리스트에 넣어봤자 새로 불러오면 초기화됨 넣을 필요없음
+                            Note n = new Note(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent());
+                            postlist.add(n);
+                        }
+                        if(post.getPosi()==1) {
+                            list.add("[투표]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
+                            Vote v = new Vote(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent(), null);
+                            //여기 체크리스트 넣어야함 지금은 null
+                            votelist.add(v);
+                        }
+                        if(post.getPosi()==2) {
+                            list.add("[일정]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
+                            Schedule s = new Schedule(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent(), post.getDday());
+                            callist.add(s);
+                        }
+
+                        list_itemArrayList.add(post);
+                        adapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        getPostListRequest getpostListRequest = new getPostListRequest(roomCode, responseListener); //여기서 userID로 보내는거 같음
+        RequestQueue queue = Volley.newRequestQueue(ForumActivity.this);
+        queue.add(getpostListRequest);
 
     }
 
@@ -118,6 +181,7 @@ public class ForumActivity extends AppCompatActivity {
                 //여기서 게시글인지 뭔지 나눠야함
                 if(p.getPosi()==0) {
                     list.add("[게시글]  " + p.getTitle() + "\n" + p.getName() + "\t\t" + p.getWrite_date());
+                    //근데 이거 노트리스트에 넣어봤자 새로 불러오면 초기화됨 넣을 필요없음
                     Note n = new Note(p.getName(), p.getWrite_date(), p.getTitle(), p.getContent());
                     postlist.add(n);
                 }
