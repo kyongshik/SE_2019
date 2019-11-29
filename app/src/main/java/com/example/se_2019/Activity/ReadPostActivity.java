@@ -16,10 +16,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.se_2019.Note;
+import com.example.se_2019.*;
 import com.example.se_2019.R;
-import com.example.se_2019.Schedule;
-import com.example.se_2019.Vote;
 
 import java.util.ArrayList;
 
