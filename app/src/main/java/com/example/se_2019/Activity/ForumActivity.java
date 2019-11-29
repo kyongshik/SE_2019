@@ -18,11 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-<<<<<<< HEAD
 import com.example.se_2019.DBRequest.AddAlarm;
-=======
 import com.example.se_2019.DBRequest.getPostListRequest;
->>>>>>> 3d74a157514b2ecd2df1b79555a5a731c1cc0c13
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
 import com.example.se_2019.R;
@@ -55,18 +52,12 @@ public class ForumActivity extends AppCompatActivity {
     ArrayList<Schedule> callist = new ArrayList<>();
     ArrayList<Vote> votelist = new ArrayList<>();
 
-<<<<<<< HEAD
 
-    String roomCode, roomName;
-    TextView room_name, room_code;
-    String userID;
-=======
     String roomCode,roomName;
     TextView room_name,room_code;
     String userID, json_user, json_name, json_write_date, json_title;
     String json_content, json_chklist, json_Dday;
     int json_posi, json_num;
->>>>>>> 3d74a157514b2ecd2df1b79555a5a731c1cc0c13
 
 
     String alarm_time = null;
@@ -295,6 +286,7 @@ public class ForumActivity extends AppCompatActivity {
             intent.putExtra("alarm_title", alarm_title);
             intent.putExtra("check_alarm",success);
             intent.putExtra("roomID", roomCode);
+            Toast.makeText(this, roomCode, Toast.LENGTH_SHORT).show();
             intent.putExtra("userID", userID);
             startActivity(intent);
         }
