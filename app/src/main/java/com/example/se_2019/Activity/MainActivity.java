@@ -20,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.se_2019.R;
 import com.example.se_2019.Room;
-import com.example.se_2019.DBRequest.getRoomListRequest;
+import com.example.se_2019.DBRequest.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
