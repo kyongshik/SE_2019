@@ -47,13 +47,20 @@ public class content_notice extends AppCompatActivity {
     String roomcode;
     List<String> list = new ArrayList<>();
     ArrayAdapter<String> adapter;
+
+    String userRoom;
     ///////////////////////////////////////////////////////////////////////////////////////////////
+
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_notice);
+
+        final Intent intent = getIntent();
+        userRoom = intent.getExtras().getString("roomID");
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,9 +83,9 @@ public class content_notice extends AppCompatActivity {
                         roomcode = jsonObject.getString("roomcode");
                         Log.i("ALARM",alarm_title);
                         Alarm alarm = new Alarm(alarm_time, alarm_title,roomcode);
-
-                        list.add("time : " + alarm.getTime() + " title : " + alarm.getContent()+" code: "+alarm.getRoomcode());
-
+                        if(userRoom.equals(roomcode)){
+                            list.add("time : " + alarm.getTime() + " title : " + alarm.getContent()+" code: "+alarm.getRoomcode());
+                        }
                     }
                     isItNull(list);
                     adapter.notifyDataSetChanged();
