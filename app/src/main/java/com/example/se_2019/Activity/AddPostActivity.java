@@ -3,6 +3,7 @@ package com.example.se_2019.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,13 +17,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.se_2019.DBRequest.AddPostRequest;
+import com.example.se_2019.Alarm;
+import com.example.se_2019.DBRequest.*;
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
 import com.example.se_2019.R;
@@ -65,6 +68,9 @@ public class AddPostActivity extends AppCompatActivity {
     private static Schedule schedule;
     private static Post p;
     String userID;
+    String roomCode;
+
+    private static Alarm alarm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,20 +86,43 @@ public class AddPostActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+//        final Intent intent = getIntent();
+//        String alarm_time = intent.getExtras().getString("alarm_time");
+//        String alarm_title = intent.getExtras().getString("alarm_title");
+
         //전 activity에서 보낸 데이터 전달받음
         Bundle bundle = getIntent().getExtras();
         String userID = bundle.getString("userID");
-        String roomCode = bundle.getString("room_code");
+        roomCode = bundle.getString("room_code");
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 textView.setText("" + parent.getItemAtPosition(position));
                 saveBtn = findViewById(R.id.save);
                 pos = position;
+
+
+                CalendarView calendar = findViewById(R.id.calendarview);
+                calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                    @Override
+                    public void onSelectedDayChange(CalendarView view, int year,
+                                                    int month, int dayOfMonth) {
+                          Toast.makeText(getApplicationContext(), "" + year + "/" + (month + 1) + "/" + dayOfMonth, Toast.LENGTH_SHORT).show();
+                        CalDate = findViewById(R.id.date_calendar);
+                        Calstr = year + "/" + (month + 1) + "/" + dayOfMonth;
+                        CalDate.setText(Calstr);
+                    }
+                });//날짜 자동으로 입력받기
+
+
+
+
                 Button.OnClickListener mClickListener0 = new View.OnClickListener() {
                     public void onClick(View v) {
+                        Log.i("ALARM","언제 눌리는지 보쟈"+String.valueOf(position));
                         NUMBER++;
                         date = new Date();
                         dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm", java.util.Locale.getDefault());
@@ -127,17 +156,6 @@ public class AddPostActivity extends AppCompatActivity {
 
                         } else if (pos == 2) {
 
-                            CalendarView calendar = findViewById(R.id.calendarview);
-                            calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-                                public void onSelectedDayChange(CalendarView view, int year,
-                                                                int month, int dayOfMonth) {
-                                    //  Toast.makeText(getApplicationContext(), "" + year + "/" +
-                                    //        (month + 1) + "/" + dayOfMonth, Toast.LENGTH_SHORT).show();
-                                    CalDate = findViewById(R.id.date_calendar);
-                                    Calstr = year + "/" + (month + 1) + "/" + dayOfMonth;
-                                    CalDate.setText(Calstr);
-                                }
-                            });//날짜 자동으로 입력받기
 
                             title = findViewById(R.id.title_calendar);
                             titles = title.getText().toString();
@@ -147,6 +165,8 @@ public class AddPostActivity extends AppCompatActivity {
 
                             schedule = new Schedule(userID, strDate, titles, contents, Calstr);
                             p = new Post(userID, strDate, titles, contents, null, Calstr, 2, 2);
+                            Toast.makeText(getApplicationContext(), "서버서버"+roomCode, Toast.LENGTH_LONG).show();
+                            alarm = new Alarm(Calstr, titles, roomCode);
                         }
 
                         //서버에 추가
@@ -156,12 +176,17 @@ public class AddPostActivity extends AppCompatActivity {
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
                                     boolean success = jsonObject.getBoolean("successadd");
+                                    //boolean success2 = jsonObject.getBoolean("successalarm");
+
                                     if (success) { //방등록에 성공한 경우
                                         //intent로 다른 창에 뜨게 함
                                         Intent intent = getIntent();
                                         intent.putExtra("postinfo", p);
+                                        intent.putExtra("alarm_time", alarm.getTime());
+                                        intent.putExtra("alarm_title",alarm.getContent());
                                         setResult(RESULT_OK, intent);
                                         finish();
+
                                     } else { //등록에 실패한 경우
                                         Toast.makeText(getApplicationContext(), "서버등록에 실패하였습니다.", Toast.LENGTH_LONG).show();
                                         return;
@@ -171,9 +196,13 @@ public class AddPostActivity extends AppCompatActivity {
                                 }
                             }
                         };
+
+
+
                         AddPostRequest addPostRequest = new AddPostRequest(roomCode, userID, p.getWrite_date(), p.getTitle(), p.getContent(), null, p.getDday(),String.valueOf(p.getPosi()), String.valueOf(p.getNum()), responseListener);
                         RequestQueue queue = Volley.newRequestQueue(AddPostActivity.this);
                         queue.add(addPostRequest);
+
                     }
                 };
                 saveBtn.setOnClickListener(mClickListener0);
@@ -232,13 +261,11 @@ public class AddPostActivity extends AppCompatActivity {
                     view2.setVisibility(View.VISIBLE);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
-
 
     //TOOLBAR설정
     @Override

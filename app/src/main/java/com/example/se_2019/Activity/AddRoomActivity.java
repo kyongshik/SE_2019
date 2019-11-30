@@ -19,11 +19,10 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.se_2019.DBRequest.AddRoomRequest;
-import com.example.se_2019.DBRequest.AddSearchRoomRequest;
-import com.example.se_2019.DBRequest.SearchRoomRequest;
+import com.example.se_2019.DBRequest.*;
 import com.example.se_2019.R;
 import com.example.se_2019.Room;
+import com.example.se_2019.content_notice;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -282,7 +281,10 @@ public class AddRoomActivity extends AppCompatActivity {
             startActivity(intent);
         }
         if (id == R.id.toolbar_alarm) {
-            Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "알람버튼을 눌렀습니다++", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, content_notice.class);
+            intent.putExtra("userID",userID);
+            startActivity(intent);
         }
         if (id == R.id.toolbar_profile) {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
