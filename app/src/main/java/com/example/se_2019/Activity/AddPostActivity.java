@@ -112,8 +112,8 @@ public class AddPostActivity extends AppCompatActivity {
                             Datepick = findViewById(R.id.date_vote);
                             Datepick.setText(strDate);
                             //날짜 받아오기
-                            title = findViewById(R.id.title_vote);
                             titles = title.getText().toString();
+                            title = findViewById(R.id.title_vote);
                             //제목
                             contents = content.getText().toString();
                             //메모 입력받는 것
@@ -121,33 +121,7 @@ public class AddPostActivity extends AppCompatActivity {
                             Okbtn = findViewById(R.id.OkBtn); //리스트 추가 OK버튼
 
                             final EditText input = findViewById(R.id.inputstr);
-                            Button.OnClickListener mClickListener1 = new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    input.setVisibility(View.VISIBLE);
-                                    Okbtn.setVisibility(View.VISIBLE);
-                                }
-                            };
-                            addbtn.setOnClickListener(mClickListener1);
-                            Button.OnClickListener mClickListener2 = new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    strBox = input.getText().toString();
-                                    chkBox = new CheckBox(getApplicationContext());
-                                    chkBox.setBackgroundColor(Color.LTGRAY);
-                                    chkBox.setText(strBox);
-                                    chkBox.setTextColor(Color.BLACK);
-                                    chkBox.setVisibility(View.VISIBLE);
-                                    if (chkList.size() < 5) {
-                                        ll = findViewById(R.id.vote_top);
-                                        ll.addView(chkBox);
-                                        chkList.add(chkBox);
-                                        chkListStr.add(strBox);
-                                        input.setText("");
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "5개까지만 입력할 수 있습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            };
-                            Okbtn.setOnClickListener(mClickListener2);
+
                             Vote vote = new Vote(userID, strDate, titles, contents, chkListStr);
                             p = new Post(userID, strDate, titles, contents, null, null, 1,  1); //chklist넣어야함
 
@@ -218,6 +192,37 @@ public class AddPostActivity extends AppCompatActivity {
                     view1.setVisibility(View.VISIBLE);
                     View view2 = findViewById(R.id.calendar);
                     view2.setVisibility(View.GONE);
+                    addbtn = findViewById(R.id.AddBox); //ADD LIST
+                    Okbtn = findViewById(R.id.OkBtn); //리스트 추가 OK버튼
+
+                    final EditText input = findViewById(R.id.inputstr);
+                    Button.OnClickListener mClickListener1 = new View.OnClickListener() {
+                        public void onClick(View v) {
+                            input.setVisibility(View.VISIBLE);
+                            Okbtn.setVisibility(View.VISIBLE);
+                        }
+                    };
+                    addbtn.setOnClickListener(mClickListener1);
+                    Button.OnClickListener mClickListener2 = new View.OnClickListener() {
+                        public void onClick(View v) {
+                            strBox = input.getText().toString();
+                            chkBox = new CheckBox(getApplicationContext());
+                            chkBox.setBackgroundColor(Color.LTGRAY);
+                            chkBox.setText(strBox);
+                            chkBox.setTextColor(Color.BLACK);
+                            chkBox.setVisibility(View.VISIBLE);
+                            if (chkList.size() < 5) {
+                                ll = findViewById(R.id.vote_top);
+                                ll.addView(chkBox);
+                                chkList.add(chkBox);
+                                chkListStr.add(strBox);
+                                input.setText("");
+                            } else {
+                                Toast.makeText(getApplicationContext(), "5개까지만 입력할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    };
+                    Okbtn.setOnClickListener(mClickListener2);
                 } else if (pos == 2) {
                     View view0 = findViewById(R.id.post);
                     view0.setVisibility(View.GONE);
@@ -243,7 +248,6 @@ public class AddPostActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
