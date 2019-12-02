@@ -164,6 +164,7 @@ public class AddPostActivity extends AppCompatActivity {
                             schedule = new Schedule(userID, strDate, titles, contents, Calstr);
                             p = new Post(userID, strDate, titles, contents, null, Calstr, 2, 2);
                             alarm = new Alarm(Calstr, titles, roomCode);
+                            check_server();
                         }
 
                         //서버에 추가
@@ -179,8 +180,7 @@ public class AddPostActivity extends AppCompatActivity {
                                         //intent로 다른 창에 뜨게 함
                                         Intent intent = getIntent();
                                         intent.putExtra("postinfo", p);
-                                        intent.putExtra("alarm_time", alarm.getTime());
-                                        intent.putExtra("alarm_title",alarm.getContent());
+
                                         setResult(RESULT_OK, intent);
                                         finish();
 
@@ -196,7 +196,9 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
+
                         AddPostRequest addPostRequest = new AddPostRequest(roomCode, userID, p.getWrite_date(), p.getTitle(), p.getContent(), checklist, p.getDday(),String.valueOf(p.getPosi()), String.valueOf(p.getNum()), responseListener);
+
                         RequestQueue queue = Volley.newRequestQueue(AddPostActivity.this);
                         queue.add(addPostRequest);
 
@@ -293,5 +295,34 @@ public class AddPostActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void check_server() {
+        Response.Listener<String> responseListener_a = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("successalarm");
+                    //Toast.makeText(getApplicationContext(), String.valueOf(success), Toast.LENGTH_LONG).show();
+                    if (success) { //방등록에 성공한 경우
+                        Toast.makeText(getApplicationContext(), "서버등록에 성공하였습니다.", Toast.LENGTH_LONG).show();
+                        //intent로 다른 창에 뜨게 함
+                        Intent intent = getIntent();
+                        intent.putExtra("roomID",roomCode);
+                        setResult(RESULT_OK, intent);
+                        finish();
+
+                    } else { //등록에 실패한 경우
+                        Toast.makeText(getApplicationContext(), "서버등록에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        AddAlarm addAlarmRequest = new AddAlarm(alarm.getTime(), alarm.getContent(),roomCode, responseListener_a);
+        RequestQueue queue_a = Volley.newRequestQueue(AddPostActivity.this);
+        queue_a.add(addAlarmRequest);
     }
 }

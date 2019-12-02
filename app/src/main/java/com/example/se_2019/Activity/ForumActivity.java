@@ -188,9 +188,7 @@ public class ForumActivity extends AppCompatActivity {
         if (requestCode == NEW_POST) {
             if (resultCode == RESULT_OK) {
                 Post p = data.getParcelableExtra("postinfo");
-                alarm_time = data.getExtras().getString("alarm_time");
-                alarm_title = data.getExtras().getString("alarm_title");
-                check_server();
+
                 //여기서 게시글인지 뭔지 나눠야함
                 if (p.getPosi() == 0) {
                     list.add("[게시글]  " + p.getTitle() + "\n" + p.getName() + "\t\t" + p.getWrite_date());
@@ -227,35 +225,7 @@ public class ForumActivity extends AppCompatActivity {
 
         startActivityForResult(intent, NEW_POST);
     }
-    public void check_server() {
-        Response.Listener<String> responseListener_a = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    success = jsonObject.getBoolean("successalarm");
-                    //Toast.makeText(getApplicationContext(), String.valueOf(success), Toast.LENGTH_LONG).show();
-                    if (success) { //방등록에 성공한 경우
-                        Toast.makeText(getApplicationContext(), "서버등록에 성공하였습니다.", Toast.LENGTH_LONG).show();
-                        //intent로 다른 창에 뜨게 함
-                        Intent intent = getIntent();
-                        intent.putExtra("roomID",roomCode);
-                        setResult(RESULT_OK, intent);
-                        finish();
 
-                    } else { //등록에 실패한 경우
-                        Toast.makeText(getApplicationContext(), "서버등록에 실패하였습니다.", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        AddAlarm addAlarmRequest = new AddAlarm(alarm_time, alarm_title,roomCode, responseListener_a);
-        RequestQueue queue_a = Volley.newRequestQueue(ForumActivity.this);
-        queue_a.add(addAlarmRequest);
-    }
     //TOOLBAR설정
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

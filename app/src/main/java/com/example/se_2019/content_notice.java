@@ -30,13 +30,16 @@ import com.example.se_2019.Activity.*;
 import com.example.se_2019.DBRequest.AddAlarm;
 import com.example.se_2019.DBRequest.SearchRoomRequest;
 import com.example.se_2019.DBRequest.getAlarmRequest;
+import com.example.se_2019.DBRequest.getRoomUserRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class content_notice extends AppCompatActivity {
@@ -50,6 +53,8 @@ public class content_notice extends AppCompatActivity {
 
     String userRoom;
     ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    List<Alarm> userlist = new ArrayList<>();
 
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
 
@@ -67,6 +72,11 @@ public class content_notice extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+        checkAlarm();
+
+
 
         ListView listView = (ListView) findViewById(R.id.listview_notice);
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -195,6 +205,64 @@ public class content_notice extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void checkAlarm(){
 
+        Toast.makeText(this, "따란.", Toast.LENGTH_SHORT).show();
+        Response.Listener<String> responseListener_a = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        String user = jsonObject.getString("userID");
+
+                        //Alarm al = new Alarm(user,time);
+//
+//                        al.setUser(user);
+//                        al.setTime(time);
+                       // userlist.add(al);
+
+                    }
+
+                    timeAlarm(userlist);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        getRoomUserRequest roomUserRequest = new getRoomUserRequest(userRoom, responseListener_a);
+        RequestQueue q = Volley.newRequestQueue(content_notice.this);
+        q.add(roomUserRequest);
+    }
+    public void timeAlarm(List list){
+        String currentTime = finddate();
+        String[]temp;
+        for(int i = 0; i<list.size(); i++){
+            String text = list.get(i).toString();
+            temp = alarm_time.toString().split("/");
+            int day = Integer.parseInt(temp[2]);
+            day--;
+            if(day < 10){
+                temp[2] = "0"+ String.valueOf(day);
+            }else{
+                temp[2] = String.valueOf(day);
+            }
+            String time = temp[0]+"/"+temp[1]+"/"+temp[2];
+            if(currentTime.equals(time)){
+                NotificationSomethings();
+            }
+        }
+    }
+    public String finddate()
+    {
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String fmdate = sdf.format(date);
+        return fmdate;
+    }
 
 }

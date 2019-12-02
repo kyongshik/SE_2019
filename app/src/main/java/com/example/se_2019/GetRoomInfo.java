@@ -20,6 +20,7 @@ import androidx.core.app.NotificationCompat;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.se_2019.Activity.LoginActivity;
 import com.example.se_2019.DBRequest.getRoomUserRequest;
 
 import org.json.JSONArray;
@@ -89,7 +90,11 @@ public class GetRoomInfo extends AppCompatActivity {
         temp = room_time.toString().split("/");
         int day = Integer.parseInt(temp[2]);
         day--;
-        temp[2] = String.valueOf(day);
+        if(day < 10){
+            temp[2] = "0"+ String.valueOf(day);
+        }else{
+            temp[2] = String.valueOf(day);
+        }
         String time = temp[0]+"/"+temp[1]+"/"+temp[2];
         if(currentTime.equals(time)){
             NotificationSomethings();
@@ -108,7 +113,7 @@ public class GetRoomInfo extends AppCompatActivity {
 
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent notificationIntent = new Intent(this, GetRoomInfo.class);
+        Intent notificationIntent = new Intent(this, LoginActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK) ;
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,  PendingIntent.FLAG_UPDATE_CURRENT);
 
