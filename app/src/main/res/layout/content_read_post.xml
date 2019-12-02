@@ -16,7 +16,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/Read_Post_notetop"
@@ -110,7 +110,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/Read_Post_votetop"

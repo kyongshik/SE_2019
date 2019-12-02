@@ -18,7 +18,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.se_2019.Alarm;
-import com.example.se_2019.DBRequest.AddAlarm;
 import com.example.se_2019.DBRequest.getPostListRequest;
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
@@ -45,9 +44,10 @@ public class ForumActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     ArrayList<String> list = new ArrayList<>(); //제목 가져올 리스트
-    ArrayList<Note> postlist = new ArrayList<>();
+    ArrayList<Note> notelist = new ArrayList<>();
     ArrayList<Schedule> callist = new ArrayList<>();
     ArrayList<Vote> votelist = new ArrayList<>();
+    ArrayList<Post> postlist = new ArrayList<>();
 
 
     String roomCode,roomName;
@@ -84,13 +84,9 @@ public class ForumActivity extends AppCompatActivity {
 
         room_code = findViewById(R.id.et_Code);
         room_code.setText(roomCode);
-
         userID = intent_roominfo.getExtras().getString("userID");
-
-
         setListView();
         listClick();
-
 
         list_itemArrayList = new ArrayList<Post>();
 
@@ -118,12 +114,14 @@ public class ForumActivity extends AppCompatActivity {
                         json_posi = Integer.parseInt(jsonObject.getString("posi"));
                         json_num = Integer.parseInt(jsonObject.getString("num"));
                         Post post = new Post(json_name, json_write_date, json_title,
-                                json_content, null, json_Dday, json_posi, json_num);
+                                json_content, json_chklist, json_Dday, json_posi, json_num);
+                        postlist.add(post);
                         if(post.getPosi()==0) {
                             list.add("[게시글]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
                             //근데 이거 노트리스트에 넣어봤자 새로 불러오면 초기화됨 넣을 필요없음
+
                             Note n = new Note(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent());
-                            postlist.add(n);
+                            notelist.add(n);
                         }
                         if(post.getPosi()==1) {
                             list.add("[투표]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
@@ -136,7 +134,6 @@ public class ForumActivity extends AppCompatActivity {
                             Schedule s = new Schedule(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent(), post.getDday());
                             callist.add(s);
                         }
-
                         list_itemArrayList.add(post);
                         adapter.notifyDataSetChanged();
                     }
@@ -163,22 +160,10 @@ public class ForumActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String temp = adapter.getItem(position).substring(0, 3);
                 Toast.makeText(getApplicationContext(), "클릭 " + temp, Toast.LENGTH_SHORT).show();
-                if (temp.equals("[게시")) {
-                    Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
-                    Note n = postlist.get(list_itemArrayList.get(position).getNum());
-                    in.putExtra("post", n);
-                    startActivity(in);
-                } else if (temp.equals("[투표")) {
-                    Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
-                    Vote v = votelist.get(list_itemArrayList.get(position).getNum());
-                    in.putExtra("vote", v);
-                    startActivity(in);
-                } else if (temp.equals("[일정")) {
-                    Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
-                    Schedule s = callist.get(list_itemArrayList.get(position).getNum());
-                    in.putExtra("cal", s);
-                    startActivity(in);
-                }
+                Intent in  = new Intent(ForumActivity.this, ReadPostActivity.class);
+                Post p = postlist.get(list_itemArrayList.get(position).getNum()-1);
+                in.putExtra("post",p);
+                startActivity(in);
             }
         });
     }
@@ -194,7 +179,7 @@ public class ForumActivity extends AppCompatActivity {
                     list.add("[게시글]  " + p.getTitle() + "\n" + p.getName() + "\t\t" + p.getWrite_date());
                     //근데 이거 노트리스트에 넣어봤자 새로 불러오면 초기화됨 넣을 필요없음
                     Note n = new Note(p.getName(), p.getWrite_date(), p.getTitle(), p.getContent());
-                    postlist.add(n);
+                    notelist.add(n);
                 }
                 if (p.getPosi() == 1) {
                     list.add("[투표]  " + p.getTitle() + "\n" + p.getName() + "\t\t" + p.getWrite_date());

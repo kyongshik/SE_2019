@@ -48,8 +48,11 @@ public class ReadPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read_post);
         Intent in = getIntent();
         // Note s = (Note) in.getParcelableExtra("post");
-        if((Note) in.getParcelableExtra("post") != null){
-            Note n = in.getParcelableExtra("post");
+        Post p = in.getParcelableExtra("post");
+
+        //if((Note) in.getParcelableExtra("post") != null){
+        if(p.getPosi()==0){
+            //Note n = in.getParcelableExtra("post");
             View read_note = findViewById(R.id.Read_Post_note);
             read_note.setVisibility(View.VISIBLE);
             View read_vote = findViewById(R.id.Read_Post_vote);
@@ -61,10 +64,10 @@ public class ReadPostActivity extends AppCompatActivity {
             date = findViewById(R.id.Read_Post_noteDate);
             title = findViewById(R.id.Read_Post_noteTitle);
             content = findViewById(R.id.Read_Post_noteContent);
-            name.setText(n.getName());
-            date.setText(n.getDate());
-            title.setText(n.getTitle());
-            content.setText(n.getContent());
+            name.setText(p.getName());
+            date.setText(p.getWrite_date());
+            title.setText(p.getTitle());
+            content.setText(p.getContent());
 
             //Add버튼 클릭이벤트 추가
 
@@ -73,12 +76,11 @@ public class ReadPostActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     llcomment = findViewById(R.id.Read_Post_noteList);
-                    //LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     llcomment.setOrientation(LinearLayout.VERTICAL);
                     comment = new TextView(ReadPostActivity.this);
                     EditText edit = findViewById(R.id.Read_Post_input_Comment);
                     String str = edit.getText().toString();
-                    comment.setText(str+"\t\t//"+n.getName());
+                    comment.setText(str+"\t\t//"+p.getName());
                     comment.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                     comment.setPadding(20, 10, 10, 10);
                     comment.setTextColor(Color.parseColor("#4B0082"));
@@ -90,13 +92,9 @@ public class ReadPostActivity extends AppCompatActivity {
             resultBtn.setOnClickListener(mClickListener1);
 
 
-
-
-
-
         }
-        else if((Vote) in.getParcelableExtra("vote") != null){
-            Vote v = in.getParcelableExtra("vote");
+        else if(p.getPosi()==1){
+           // Vote v = in.getParcelableExtra("vote");
             View read_note = findViewById(R.id.Read_Post_note);
             read_note.setVisibility(View.GONE);
             View read_vote = findViewById(R.id.Read_Post_vote);
@@ -108,21 +106,37 @@ public class ReadPostActivity extends AppCompatActivity {
             date = findViewById(R.id.Read_Post_voteDate);
             title = findViewById(R.id.Read_Post_voteTitle);
             content = findViewById(R.id.Read_Post_voteContent);
-            name.setText(v.getName());
-            date.setText(v.getDate());
-            title.setText(v.getTitle());
-            content.setText(v.getContent());
+            name.setText(p.getName());
+            date.setText(p.getWrite_date());
+            title.setText(p.getTitle());
+            content.setText(p.getContent());
             LinearLayout ll = findViewById(R.id.Read_Post_votetop2);
-            for(int i = 0; i <v.getchklist_size(); i++){
-                chkBox = new CheckBox(getApplicationContext());
-                chkBox.setBackgroundColor(Color.LTGRAY);
-                chkBox.setText(v.getchklist(i));
-                chkBox.setTextColor(Color.BLACK);
-                chkBox.setVisibility(View.VISIBLE);
-                chkList.add(chkBox);
-                ll.addView(chkBox);
+            String chkString = p.getChklist();
+            String[] chkArray = chkString.split("@#");
+            for(int i = 0; i <chkArray.length; i++){
+                    chkBox = new CheckBox(getApplicationContext());
+                    chkBox.setBackgroundColor(Color.LTGRAY);
+                    chkBox.setText(chkArray[i]);
+                    chkBox.setTextColor(Color.BLACK);
+                    chkBox.setVisibility(View.VISIBLE);
+                    chkList.add(chkBox);
+                    ll.addView(chkBox);
             }
             //체크리스트 추가
+//            strBox = input.getText().toString();
+//
+//            checklist +=strBox+"@#"; //구분자 넣어서 checklist라는 변수에 합침
+//            chkBox = new CheckBox(getApplicationContext());
+//            chkBox.setBackgroundColor(Color.LTGRAY);
+//            chkBox.setText(strBox);
+//            chkBox.setTextColor(Color.BLACK);
+//            chkBox.setVisibility(View.VISIBLE);
+//            if (chkList.size() < 5) {
+//                ll = findViewById(R.id.vote_top);
+//                ll.addView(chkBox);
+//                chkList.add(chkBox);
+//                chkListStr.add(strBox);
+//                input.setText("");
             ///////////////////////////////////////////////////////////////////////
             setBtn = findViewById(R.id.Read_Post_vote_setBtn); //투표에서 체크한후 '선택'버튼
             Button.OnClickListener mClickListener = new View.OnClickListener(){
@@ -143,8 +157,8 @@ public class ReadPostActivity extends AppCompatActivity {
             setBtn.setOnClickListener(mClickListener);
 
         }
-        else if((Schedule) in.getParcelableExtra("cal") != null){
-            Schedule s = in.getParcelableExtra("cal");
+        else if(p.getPosi()==2){
+            //Schedule s = in.getParcelableExtra("cal");
             View read_note = findViewById(R.id.Read_Post_note);
             read_note.setVisibility(View.GONE);
             View read_vote = findViewById(R.id.Read_Post_vote);
@@ -157,16 +171,13 @@ public class ReadPostActivity extends AppCompatActivity {
             title = findViewById(R.id.Read_Post_scheduleTitle);
             content = findViewById(R.id.Read_Post_scheduleContent);
             CalDate = findViewById(R.id.Read_Post_schedule_CalDate);
-            name.setText(s.getName());
-            date.setText(s.getDate());
-            title.setText(s.getTitle());
-            content.setText(s.getContent());
-            CalDate.setText(s.getDday());
+            name.setText(p.getName());
+            date.setText(p.getWrite_date());
+            title.setText(p.getTitle());
+            content.setText(p.getContent());
+            CalDate.setText(p.getDday());
             //캘린더 표시 추가
-
         }
-
-
 
         //툴바
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -175,19 +186,6 @@ public class ReadPostActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
     }
 
 
