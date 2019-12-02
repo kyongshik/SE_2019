@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.example.se_2019.Content_Rules;
 import com.example.se_2019.R;
-import com.example.se_2019.content_notice;
+import com.example.se_2019.*;
 
 public class Preferences extends PreferenceActivity {
     Preference preference_notice, preference_rule, preference_logout;

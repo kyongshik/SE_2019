@@ -10,16 +10,19 @@ public class Schedule implements Parcelable{
     private String date;
     private String title;
     private String content;
+    private String Dday;
     private int posi = 2;
 
-
-
-    public Schedule(String name, String date, String title, String content){
+    public Schedule(String name, String date, String title, String content, String Dday){
         this.name = name;
         this.date = date;
         this.title = title;
         this.content = content;
+        this.Dday = Dday;
         posi = 2;
+
+        //date하나더 만들어야함
+        //지금 저장한건 작성한 날짜
     }
 
     protected Schedule(Parcel in){
@@ -27,6 +30,7 @@ public class Schedule implements Parcelable{
         date = in.readString();
         title = in.readString();
         content = in.readString();
+        Dday = in.readString();
         posi = 2;
     }
 
@@ -56,6 +60,16 @@ public class Schedule implements Parcelable{
         dest.writeString(date);
         dest.writeString(title);
         dest.writeString(content);
+        dest.writeString(Dday);
+    }
+
+
+    public String getDday() {
+        return Dday;
+    }
+
+    public void setDday(String dday) {
+        Dday = dday;
     }
 
 

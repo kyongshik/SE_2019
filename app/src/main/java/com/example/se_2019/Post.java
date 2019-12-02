@@ -1,42 +1,75 @@
 package com.example.se_2019;
 
-import android.widget.ImageButton;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.util.Date;
+import java.util.ArrayList;
 
-public class Post {
+public class Post implements Parcelable{
     //목록에 띄워질 수 있게 만든 클래스
-    private int profile_image;
     private String name;
+    private String write_date;
     private String title;
-    private Date write_date;
     private String content;
-    private ImageButton imgbtn;
-
-    public ImageButton getImgbtn(){
-        return imgbtn;
-    }
-
-    public int getProfile_image() {
-        return profile_image;
-    }
-
-    public void setProfile_image(int profile_image) {
-        this.profile_image = profile_image;
-    }
+    private ArrayList<String> chklist;
+    private String Dday;
+    private int posi;
+    private int num;
+///전체 총괄할 수 있게 만들기
 
     public String getName() {
         return name;
     }
+    protected Post(Parcel in){
+        name = in.readString();
+        write_date = in.readString();
+        title = in.readString();
+        content = in.readString();
+        chklist = in.createStringArrayList();
+        Dday = in.readString();
+        posi = in.readInt();
+        num = in.readInt();
 
-    public Post(int profile_image, String name, String title, Date write_date, String content) {
-        this.profile_image = profile_image;
+    }
+    public Post(String name, String write_date, String title, String content, ArrayList<String> chklist, String Dday, int posi, int num) {
         this.name = name;
-        this.title = title;
         this.write_date = write_date;
+        this.title = title;
         this.content = content;
+        this.chklist = chklist;
+        this.Dday = Dday;
+        this.posi = posi;
+        this.num = num;
+    }
+    public static final Parcelable.Creator<Post> CREATOR = new Parcelable.Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(write_date);
+        dest.writeString(title);
+        dest.writeString(content);
+        dest.writeStringList(chklist);
+        dest.writeString(Dday);
+        dest.writeInt(posi);
+        dest.writeInt(num);
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -49,14 +82,18 @@ public class Post {
         this.title = title;
     }
 
-    public Date getWrite_date() {
+    public String getWrite_date() {
         return write_date;
     }
 
-    public void setWrite_date(Date write_date) {
+    public void setWrite_date(String write_date) {
         this.write_date = write_date;
     }
 
+    public int getNum() {
+        return num;
+    }
+    public int getPosi() {return posi;}
     public String getContent() {
         return content;
     }
@@ -64,4 +101,23 @@ public class Post {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public ArrayList<String> getChklist() {
+        return chklist;
+    }
+
+    public void setChklist(ArrayList<String> chklist) {
+        this.chklist = chklist;
+    }
+
+    public String getDday() {
+        return Dday;
+    }
+
+    public void setDday(String dday) {
+        Dday = dday;
+    }
+
+
+
 }

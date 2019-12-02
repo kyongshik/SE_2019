@@ -20,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.se_2019.R;
 import com.example.se_2019.Room;
-import com.example.se_2019.DBRequest.getRoomListRequest;
+import com.example.se_2019.DBRequest.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,9 +30,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<String> items = new ArrayList<String>(); //이게 방 이름
     ArrayAdapter<String> adapter;
-    ArrayList<Room> roomlist = new ArrayList<Room>();
+    ArrayList<Room> roomlist = new ArrayList<Room>(); //방 리스트
     ListView listView;
     final int NEW_ROOM = 22;
     private TextView tv_id;
@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -117,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("roomlist", items);
         bundle.putString("userID", userID);
+
         intent.putExtras(bundle);
 //        intent.putExtra("userID", userID);
         startActivityForResult(intent, NEW_ROOM);

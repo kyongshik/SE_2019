@@ -15,9 +15,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.se_2019.DBRequest.getIDRequest;
 import com.example.se_2019.R;
-import com.example.se_2019.DBRequest.RegisterRequest;
+import com.example.se_2019.DBRequest.*;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -2,7 +2,6 @@ package com.example.se_2019;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.CheckBox;
 
 import java.util.ArrayList;
 
@@ -11,12 +10,13 @@ public class Vote implements  Parcelable{
     private String date;
     private String title;
     private String content;
-    private ArrayList<CheckBox> chklist;
+    //private ArrayList<CheckBox> chklist; //스트링으로 받아오기
+    private ArrayList<String> chklist; //스트링으로 받아오기
     private int posi = 1;
 
 
 
-    public Vote(String name, String date, String title, String content, ArrayList<CheckBox> chklist){
+    public Vote(String name, String date, String title, String content, ArrayList<String> chklist){
         this.name = name;
         this.date = date;
         this.title = title;
@@ -30,24 +30,26 @@ public class Vote implements  Parcelable{
         date = in.readString();
         title = in.readString();
         content = in.readString();
-        chklist = in.createTypedArrayList(chkCREATOR);
+        //chklist = in.createTypedArrayList(chkCREATOR);
+        chklist = in.createStringArrayList();
         posi = 1;
     }
 
 
 
-    ////////////////////////////////여기 안에 함수 고쳐야함
-    public static final Creator<CheckBox> chkCREATOR = new Creator<CheckBox>() {
-        @Override
-        public CheckBox createFromParcel(Parcel source) {
-            return null;
-        }
-
-        @Override
-        public CheckBox[] newArray(int size) {
-            return new CheckBox[size];
-        }
-    };
+//    ////////////////////////////////여기 안에 함수 고쳐야함
+//    public static final Creator<CheckBox> chkCREATOR = new Creator<CheckBox>() {
+//        @Override
+//        public CheckBox createFromParcel(Parcel source) {
+////            return new CheckBox(source);
+//            return null;
+//        }
+//
+//        @Override
+//        public CheckBox[] newArray(int size) {
+//            return new CheckBox[size];
+//        }
+//    };
 
     public static final Creator<Vote> CREATOR = new Creator<Vote>() {
         @Override
@@ -73,7 +75,15 @@ public class Vote implements  Parcelable{
         dest.writeString(date);
         dest.writeString(title);
         dest.writeString(content);
-        dest.createTypedArrayList(chkCREATOR);
+        dest.writeStringList(chklist);
+    }
+
+    public String getchklist(int i){
+        return chklist.get(i);
+    }
+
+    public int getchklist_size(){
+        return chklist.size();
     }
 
     public String getName() {
@@ -92,10 +102,6 @@ public class Vote implements  Parcelable{
         return content;
     }
 
-    public ArrayList<CheckBox> getChklist() {
-        return chklist;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -112,8 +118,8 @@ public class Vote implements  Parcelable{
         this.content = content;
     }
 
-    public void setChklist(ArrayList<CheckBox> chklist) {
-        this.chklist = chklist;
+    public void setChklist(ArrayList<String> item) {
+        this.chklist = item;
     }
 
     public int getPosi() {

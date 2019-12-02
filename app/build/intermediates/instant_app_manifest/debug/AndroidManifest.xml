@@ -17,17 +17,19 @@
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label=""
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.se_2019.GetRoomInfo" />
+        <activity
+            android:name="com.example.se_2019.Activity.ReadPostActivity"
+            android:label="ReadPostActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.se_2019.Content_Rules" />
         <activity android:name="com.example.se_2019.content_notice" />
         <activity android:name="com.example.se_2019.content_search_room" />
-        <activity
-            android:name="com.example.se_2019.Activity.MyListAdapter"
-            android:label="@string/title_activity_my_list_adapter"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.se_2019.Activity.RegisterActivity" />
         <activity android:name="com.example.se_2019.Activity.LoginActivity" >
             <intent-filter>

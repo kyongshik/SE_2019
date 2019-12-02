@@ -9,15 +9,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Content_Rules"></activity>
+        <activity android:name=".GetRoomInfo"></activity>
+        <activity
+            android:name=".Activity.ReadPostActivity"
+            android:label="ReadPostActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Content_Rules" />
         <activity android:name=".content_notice" />
         <activity android:name=".content_search_room" />
-        <activity
-            android:name=".Activity.MyListAdapter"
-            android:label="@string/title_activity_my_list_adapter"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>

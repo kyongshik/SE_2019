@@ -12,8 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.se_2019.Activity.MainActivity;
-import com.example.se_2019.Activity.Preferences;
+import com.example.se_2019.Activity.*;
 
 import java.util.ArrayList;
 import java.util.List;
