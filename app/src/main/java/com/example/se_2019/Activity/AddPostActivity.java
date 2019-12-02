@@ -3,7 +3,6 @@ package com.example.se_2019.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -25,7 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.se_2019.Alarm;
-import com.example.se_2019.DBRequest.*;
+import com.example.se_2019.DBRequest.AddPostRequest;
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
 import com.example.se_2019.R;
@@ -69,7 +67,7 @@ public class AddPostActivity extends AppCompatActivity {
     private static Post p;
     String userID;
     String roomCode;
-
+    String checklist="";
     private static Alarm alarm;
 
     @Override
@@ -101,7 +99,7 @@ public class AddPostActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 textView.setText("" + parent.getItemAtPosition(position));
-                saveBtn = findViewById(R.id.save);
+
                 pos = position;
 
 
@@ -119,10 +117,9 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
-
+                saveBtn = findViewById(R.id.save);
                 Button.OnClickListener mClickListener0 = new View.OnClickListener() {
                     public void onClick(View v) {
-                        Log.i("ALARM","언제 눌리는지 보쟈"+String.valueOf(position));
                         NUMBER++;
                         date = new Date();
                         dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm", java.util.Locale.getDefault());
@@ -137,6 +134,7 @@ public class AddPostActivity extends AppCompatActivity {
                             note = new Note(userID, strDate, titles, contents);
                             p = new Post(userID, strDate, titles, contents, null, null, 0,  0);
                         } else if (pos == 1) {
+                            title = findViewById(R.id.title_vote);
                             content = findViewById(R.id.content_vote);
                             Datepick = findViewById(R.id.date_vote);
                             Datepick.setText(strDate);
@@ -152,7 +150,7 @@ public class AddPostActivity extends AppCompatActivity {
                             final EditText input = findViewById(R.id.inputstr);
 
                             Vote vote = new Vote(userID, strDate, titles, contents, chkListStr);
-                            p = new Post(userID, strDate, titles, contents, null, null, 1,  1); //chklist넣어야함
+                            p = new Post(userID, strDate, titles, contents, chkListStr, null, 1,  1); //chklist넣어야함
 
                         } else if (pos == 2) {
 
@@ -165,7 +163,6 @@ public class AddPostActivity extends AppCompatActivity {
 
                             schedule = new Schedule(userID, strDate, titles, contents, Calstr);
                             p = new Post(userID, strDate, titles, contents, null, Calstr, 2, 2);
-                            Toast.makeText(getApplicationContext(), "서버서버"+roomCode, Toast.LENGTH_LONG).show();
                             alarm = new Alarm(Calstr, titles, roomCode);
                         }
 
@@ -199,7 +196,7 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
-                        AddPostRequest addPostRequest = new AddPostRequest(roomCode, userID, p.getWrite_date(), p.getTitle(), p.getContent(), null, p.getDday(),String.valueOf(p.getPosi()), String.valueOf(p.getNum()), responseListener);
+                        AddPostRequest addPostRequest = new AddPostRequest(roomCode, userID, p.getWrite_date(), p.getTitle(), p.getContent(), checklist, p.getDday(),String.valueOf(p.getPosi()), String.valueOf(p.getNum()), responseListener);
                         RequestQueue queue = Volley.newRequestQueue(AddPostActivity.this);
                         queue.add(addPostRequest);
 
@@ -235,6 +232,8 @@ public class AddPostActivity extends AppCompatActivity {
                     Button.OnClickListener mClickListener2 = new View.OnClickListener() {
                         public void onClick(View v) {
                             strBox = input.getText().toString();
+
+                            checklist +=strBox+"@#"; //구분자 넣어서 checklist라는 변수에 합침
                             chkBox = new CheckBox(getApplicationContext());
                             chkBox.setBackgroundColor(Color.LTGRAY);
                             chkBox.setText(strBox);
@@ -284,6 +283,7 @@ public class AddPostActivity extends AppCompatActivity {
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+
         }
         if (id == R.id.toolbar_profile) {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
