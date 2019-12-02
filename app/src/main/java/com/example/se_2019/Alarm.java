@@ -4,6 +4,15 @@ public class Alarm {
     String time;
     String content;//제목
     String roomcode;
+    String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public String getTime() {
         return time;
@@ -32,5 +41,9 @@ public class Alarm {
         this.time = time;
         this.content = content;
         this.roomcode = roomcode;
+    }
+    public Alarm(String user, String time){
+        this.user = user;
+        this.time = time;
     }
 }
