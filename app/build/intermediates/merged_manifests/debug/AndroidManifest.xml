@@ -21,6 +21,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.se_2019.Activity.ReadResultActivity"
+            android:label="@string/title_activity_read_result"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.se_2019.GetRoomInfo" />
         <activity
             android:name="com.example.se_2019.Activity.ReadPostActivity"

@@ -16,14 +16,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.se_2019.*;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.example.se_2019.DBRequest.AddVoteRequest;
+import com.example.se_2019.Post;
 import com.example.se_2019.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class ReadPostActivity extends AppCompatActivity {
-
-
     private TextView name;
     private TextView date;
     private TextView title;
@@ -49,9 +54,11 @@ public class ReadPostActivity extends AppCompatActivity {
         Intent in = getIntent();
         // Note s = (Note) in.getParcelableExtra("post");
         Post p = in.getParcelableExtra("post");
+        String userID = in.getStringExtra("userID");
+        String roomID = in.getStringExtra("roomID");
 
         //if((Note) in.getParcelableExtra("post") != null){
-        if(p.getPosi()==0){
+        if (p.getPosi() == 0) {
             //Note n = in.getParcelableExtra("post");
             View read_note = findViewById(R.id.Read_Post_note);
             read_note.setVisibility(View.VISIBLE);
@@ -70,17 +77,16 @@ public class ReadPostActivity extends AppCompatActivity {
             content.setText(p.getContent());
 
             //Add버튼 클릭이벤트 추가
-
+            //댓글
             resultBtn = findViewById(R.id.Read_Post_Comment_Btn);
-            Button.OnClickListener mClickListener1 = new View.OnClickListener(){
+            Button.OnClickListener mClickListener1 = new View.OnClickListener() {
                 public void onClick(View v) {
-
                     llcomment = findViewById(R.id.Read_Post_noteList);
                     llcomment.setOrientation(LinearLayout.VERTICAL);
                     comment = new TextView(ReadPostActivity.this);
                     EditText edit = findViewById(R.id.Read_Post_input_Comment);
                     String str = edit.getText().toString();
-                    comment.setText(str+"\t\t//"+p.getName());
+                    comment.setText(str + "\t\t//" + p.getName());
                     comment.setBackgroundColor(Color.parseColor("#00FFFFFF"));
                     comment.setPadding(20, 10, 10, 10);
                     comment.setTextColor(Color.parseColor("#4B0082"));
@@ -92,9 +98,8 @@ public class ReadPostActivity extends AppCompatActivity {
             resultBtn.setOnClickListener(mClickListener1);
 
 
-        }
-        else if(p.getPosi()==1){
-           // Vote v = in.getParcelableExtra("vote");
+        } else if (p.getPosi() == 1) {
+            // Vote v = in.getParcelableExtra("vote");
             View read_note = findViewById(R.id.Read_Post_note);
             read_note.setVisibility(View.GONE);
             View read_vote = findViewById(R.id.Read_Post_vote);
@@ -111,44 +116,56 @@ public class ReadPostActivity extends AppCompatActivity {
             title.setText(p.getTitle());
             content.setText(p.getContent());
             LinearLayout ll = findViewById(R.id.Read_Post_votetop2);
+
             String chkString = p.getChklist();
             String[] chkArray = chkString.split("@#");
-            for(int i = 0; i <chkArray.length; i++){
-                    chkBox = new CheckBox(getApplicationContext());
-                    chkBox.setBackgroundColor(Color.LTGRAY);
-                    chkBox.setText(chkArray[i]);
-                    chkBox.setTextColor(Color.BLACK);
-                    chkBox.setVisibility(View.VISIBLE);
-                    chkList.add(chkBox);
-                    ll.addView(chkBox);
+            for (int i = 0; i < chkArray.length; i++) {
+                chkBox = new CheckBox(getApplicationContext());
+                chkBox.setBackgroundColor(Color.LTGRAY);
+                chkBox.setText(chkArray[i]);
+                chkBox.setTextColor(Color.BLACK);
+                chkBox.setVisibility(View.VISIBLE);
+                chkList.add(chkBox);
+                ll.addView(chkBox);
             }
-            //체크리스트 추가
-//            strBox = input.getText().toString();
-//
-//            checklist +=strBox+"@#"; //구분자 넣어서 checklist라는 변수에 합침
-//            chkBox = new CheckBox(getApplicationContext());
-//            chkBox.setBackgroundColor(Color.LTGRAY);
-//            chkBox.setText(strBox);
-//            chkBox.setTextColor(Color.BLACK);
-//            chkBox.setVisibility(View.VISIBLE);
-//            if (chkList.size() < 5) {
-//                ll = findViewById(R.id.vote_top);
-//                ll.addView(chkBox);
-//                chkList.add(chkBox);
-//                chkListStr.add(strBox);
-//                input.setText("");
-            ///////////////////////////////////////////////////////////////////////
-            setBtn = findViewById(R.id.Read_Post_vote_setBtn); //투표에서 체크한후 '선택'버튼
-            Button.OnClickListener mClickListener = new View.OnClickListener(){
-                public void onClick(View v){
-                    for(int i = 0; i < chkList.size(); i++){
-                        if(chkList.get(i).isChecked()){
-                            Toast.makeText(getApplicationContext(),"==="+i+"===",Toast.LENGTH_SHORT).show();
+            int num = p.getNum();
+
+
+            setBtn = findViewById(R.id.Read_Post_vote_setBtn);
+            //선택 버튼 클릭시
+            Button.OnClickListener mClickListener = new View.OnClickListener() {
+                public void onClick(View v) {
+                    String votelist = "";
+                    for (int i = 0; i < chkList.size(); i++) {
+                        if (chkList.get(i).isChecked()) {
+                            votelist += String.valueOf(i); //선택한 자리 스트링으로 더해서 votenum이라는 변수에 저장
+//                            Toast.makeText(getApplicationContext(), "===" + i + "===", Toast.LENGTH_SHORT).show();
                             ///여기서 체크되면 인덱스 0,1,2~~ 확인해서 저장시켜야함.
-                            //chkList.get(i).setClickable(false);
                         }
                     }
-                    for(int i = 0; i < chkList.size(); i++) {
+                    //서버에 추가하는 부분
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean success = jsonObject.getBoolean("success");
+                                if (success) { //방등록에 성공한 경우
+                                    Toast.makeText(getApplicationContext(), "서버등록에 성공하였습니다~", Toast.LENGTH_LONG).show();
+                                } else { //등록에 실패한 경우
+                                    Toast.makeText(getApplicationContext(), "서버등록에 실패하였습니다.", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    AddVoteRequest addVoteRequest = new AddVoteRequest(roomID, num, chkString, votelist, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(ReadPostActivity.this);
+                    queue.add(addVoteRequest);
+
+                    for (int i = 0; i < chkList.size(); i++) {
                         chkList.get(i).setClickable(false);
                     }
                 }
@@ -156,8 +173,7 @@ public class ReadPostActivity extends AppCompatActivity {
             };
             setBtn.setOnClickListener(mClickListener);
 
-        }
-        else if(p.getPosi()==2){
+        } else if (p.getPosi() == 2) {
             //Schedule s = in.getParcelableExtra("cal");
             View read_note = findViewById(R.id.Read_Post_note);
             read_note.setVisibility(View.GONE);
@@ -178,6 +194,18 @@ public class ReadPostActivity extends AppCompatActivity {
             CalDate.setText(p.getDday());
             //캘린더 표시 추가
         }
+
+        //결과 보기 버튼 클릭시
+        resultBtn = (Button) findViewById(R.id.Read_Post_vote_ResultBtn);
+        resultBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ReadPostActivity.this, ReadResultActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
 
         //툴바
         Toolbar toolbar = findViewById(R.id.toolbar);

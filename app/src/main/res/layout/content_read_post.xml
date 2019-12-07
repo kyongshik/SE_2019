@@ -181,7 +181,8 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="290dp"
                 android:layout_marginRight="20dp"
-                android:text="결과보기" />
+                android:text="결과보기"
+                />
 
         </RelativeLayout>
 

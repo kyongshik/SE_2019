@@ -163,6 +163,8 @@ public class ForumActivity extends AppCompatActivity {
                 Intent in  = new Intent(ForumActivity.this, ReadPostActivity.class);
                 Post p = postlist.get(list_itemArrayList.get(position).getNum()-1);
                 in.putExtra("post",p);
+                in.putExtra("userID",userID); ///userID랑 roomcode도 보냄
+                in.putExtra("roomID", roomCode);
                 startActivity(in);
             }
         });
