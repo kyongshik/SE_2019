@@ -3,15 +3,13 @@ package com.example.se_2019;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-
 public class Post implements Parcelable{
     //목록에 띄워질 수 있게 만든 클래스
     private String name;
     private String write_date;
     private String title;
     private String content;
-    private ArrayList<String> chklist;
+    private String chklist;
     private String Dday;
     private int posi;
     private int num;
@@ -25,13 +23,13 @@ public class Post implements Parcelable{
         write_date = in.readString();
         title = in.readString();
         content = in.readString();
-        chklist = in.createStringArrayList();
+        chklist = in.readString();
         Dday = in.readString();
         posi = in.readInt();
         num = in.readInt();
 
     }
-    public Post(String name, String write_date, String title, String content, ArrayList<String> chklist, String Dday, int posi, int num) {
+    public Post(String name, String write_date, String title, String content,String chklist, String Dday, int posi, int num) {
         this.name = name;
         this.write_date = write_date;
         this.title = title;
@@ -65,7 +63,7 @@ public class Post implements Parcelable{
         dest.writeString(write_date);
         dest.writeString(title);
         dest.writeString(content);
-        dest.writeStringList(chklist);
+        dest.writeString(chklist);
         dest.writeString(Dday);
         dest.writeInt(posi);
         dest.writeInt(num);
@@ -102,11 +100,11 @@ public class Post implements Parcelable{
         this.content = content;
     }
 
-    public ArrayList<String> getChklist() {
+    public String getChklist() {
         return chklist;
     }
 
-    public void setChklist(ArrayList<String> chklist) {
+    public void setChklist(String chklist) {
         this.chklist = chklist;
     }
 
