@@ -173,6 +173,20 @@ public class ReadPostActivity extends AppCompatActivity {
             };
             setBtn.setOnClickListener(mClickListener);
 
+            //결과 보기 버튼 클릭시
+            resultBtn = (Button) findViewById(R.id.Read_Post_vote_ResultBtn);
+            resultBtn.setOnClickListener(
+                    new View.OnClickListener() {
+                        public void onClick(View v) {
+                            Intent intent = new Intent(ReadPostActivity.this, ReadResultActivity.class);
+                            intent.putExtra("roomID", roomID);
+                            intent.putExtra("num", num);
+                            intent.putExtra("chklist", p.getChklist());
+                            startActivity(intent);
+                        }
+                    }
+            );
+
         } else if (p.getPosi() == 2) {
             //Schedule s = in.getParcelableExtra("cal");
             View read_note = findViewById(R.id.Read_Post_note);
@@ -195,16 +209,7 @@ public class ReadPostActivity extends AppCompatActivity {
             //캘린더 표시 추가
         }
 
-        //결과 보기 버튼 클릭시
-        resultBtn = (Button) findViewById(R.id.Read_Post_vote_ResultBtn);
-        resultBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ReadPostActivity.this, ReadResultActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+
 
 
         //툴바
