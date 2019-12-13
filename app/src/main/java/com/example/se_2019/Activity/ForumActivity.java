@@ -2,7 +2,6 @@ package com.example.se_2019.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,17 +17,13 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.se_2019.DBRequest.AddAlarm;
+import com.example.se_2019.Alarm;
 import com.example.se_2019.DBRequest.getPostListRequest;
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
 import com.example.se_2019.R;
 import com.example.se_2019.Schedule;
 import com.example.se_2019.Vote;
-import com.example.se_2019.*;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,13 +43,14 @@ public class ForumActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     ArrayList<String> list = new ArrayList<>(); //제목 가져올 리스트
-    ArrayList<Note> postlist = new ArrayList<>();
+    ArrayList<Note> notelist = new ArrayList<>();
     ArrayList<Schedule> callist = new ArrayList<>();
     ArrayList<Vote> votelist = new ArrayList<>();
+    ArrayList<Post> postlist = new ArrayList<>();
 
 
-    String roomCode,roomName;
-    TextView room_name,room_code;
+    String roomCode, roomName;
+    TextView room_name, room_code;
     String userID, json_user, json_name, json_write_date, json_title;
     String json_content, json_chklist, json_Dday;
     int json_posi, json_num;
@@ -87,13 +83,9 @@ public class ForumActivity extends AppCompatActivity {
 
         room_code = findViewById(R.id.et_Code);
         room_code.setText(roomCode);
-
         userID = intent_roominfo.getExtras().getString("userID");
-
-
         setListView();
         listClick();
-
 
         list_itemArrayList = new ArrayList<Post>();
 
@@ -107,7 +99,6 @@ public class ForumActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-
                     JSONArray jsonArray = new JSONArray(response);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -121,25 +112,26 @@ public class ForumActivity extends AppCompatActivity {
                         json_posi = Integer.parseInt(jsonObject.getString("posi"));
                         json_num = Integer.parseInt(jsonObject.getString("num"));
                         Post post = new Post(json_name, json_write_date, json_title,
-                                json_content, null, json_Dday, json_posi, json_num);
-                        if(post.getPosi()==0) {
+                                json_content, json_chklist, json_Dday, json_posi, json_num);
+                        postlist.add(post);
+                        if (post.getPosi() == 0) {
                             list.add("[게시글]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
                             //근데 이거 노트리스트에 넣어봤자 새로 불러오면 초기화됨 넣을 필요없음
+
                             Note n = new Note(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent());
-                            postlist.add(n);
+                            notelist.add(n);
                         }
-                        if(post.getPosi()==1) {
+                        if (post.getPosi() == 1) {
                             list.add("[투표]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
                             Vote v = new Vote(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent(), null);
                             //여기 체크리스트 넣어야함 지금은 null
                             votelist.add(v);
                         }
-                        if(post.getPosi()==2) {
+                        if (post.getPosi() == 2) {
                             list.add("[일정]  " + post.getTitle() + "\n" + post.getName() + "\t\t" + post.getWrite_date());
                             Schedule s = new Schedule(post.getName(), post.getWrite_date(), post.getTitle(), post.getContent(), post.getDday());
                             callist.add(s);
                         }
-
                         list_itemArrayList.add(post);
                         adapter.notifyDataSetChanged();
                     }
@@ -148,7 +140,7 @@ public class ForumActivity extends AppCompatActivity {
                 }
             }
         };
-        getPostListRequest getpostListRequest = new getPostListRequest(roomCode, responseListener); //여기서 userID로 보내는거 같음
+        getPostListRequest getpostListRequest = new getPostListRequest(roomCode, responseListener);
         RequestQueue queue = Volley.newRequestQueue(ForumActivity.this);
         queue.add(getpostListRequest);
 
@@ -166,38 +158,31 @@ public class ForumActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String temp = adapter.getItem(position).substring(0, 3);
                 Toast.makeText(getApplicationContext(), "클릭 " + temp, Toast.LENGTH_SHORT).show();
-                if (temp.equals("[게시")) {
-                    Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
-                    Note n = postlist.get(list_itemArrayList.get(position).getNum());
-                    in.putExtra("post", n);
-                    startActivity(in);
-                } else if (temp.equals("[투표")) {
-                    Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
-                    Vote v = votelist.get(list_itemArrayList.get(position).getNum());
-                    in.putExtra("vote", v);
-                    startActivity(in);
-                } else if (temp.equals("[일정")) {
-                    Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
-                    Schedule s = callist.get(list_itemArrayList.get(position).getNum());
-                    in.putExtra("cal", s);
-                    startActivity(in);
-                }
+                Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
+                Post p;
+
+                p = postlist.get(list_itemArrayList.get(position).getNum() - 1);
+                in.putExtra("post", p);
+                in.putExtra("userID", userID); ///userID랑 roomcode도 보냄
+                in.putExtra("roomID", roomCode);
+                startActivity(in);
             }
         });
     }
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NEW_POST) {
+        if (requestCode == NEW_POST) { //새로운 게시글 추가
             if (resultCode == RESULT_OK) {
                 Post p = data.getParcelableExtra("postinfo");
+                postlist.add(p);
 
                 //여기서 게시글인지 뭔지 나눠야함
                 if (p.getPosi() == 0) {
                     list.add("[게시글]  " + p.getTitle() + "\n" + p.getName() + "\t\t" + p.getWrite_date());
                     //근데 이거 노트리스트에 넣어봤자 새로 불러오면 초기화됨 넣을 필요없음
                     Note n = new Note(p.getName(), p.getWrite_date(), p.getTitle(), p.getContent());
-                    postlist.add(n);
+                    notelist.add(n);
                 }
                 if (p.getPosi() == 1) {
                     list.add("[투표]  " + p.getTitle() + "\n" + p.getName() + "\t\t" + p.getWrite_date());
@@ -219,7 +204,7 @@ public class ForumActivity extends AppCompatActivity {
 
 
     public void writeClick(View view) {
-        Intent intent = new Intent(ForumActivity.this, AddPostActivity.class);
+        Intent intent = new Intent(ForumActivity.this, AddPostActivity.class); //여기에서 게시글 작성 버튼 클릭
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("postlist", list);//게시판 리스트에 게시글 정보 추가
         bundle.putString("userID", userID);
@@ -238,7 +223,6 @@ public class ForumActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -254,7 +238,7 @@ public class ForumActivity extends AppCompatActivity {
             Intent intent = new Intent(this, content_notice.class);
             intent.putExtra("alarm_time", alarm_time);
             intent.putExtra("alarm_title", alarm_title);
-            intent.putExtra("check_alarm",success);
+            intent.putExtra("check_alarm", success);
             intent.putExtra("roomID", roomCode);
             Toast.makeText(this, roomCode, Toast.LENGTH_SHORT).show();
             intent.putExtra("userID", userID);
@@ -269,7 +253,6 @@ public class ForumActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

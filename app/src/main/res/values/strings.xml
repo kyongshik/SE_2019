@@ -4,5 +4,6 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_room_list">RoomList</string>
     <string name="title_activity_my_list_adapter">MyListAdapter</string>
+    <string name="title_activity_read_result">ReadResult</string>
 
 </resources>
