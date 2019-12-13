@@ -11,7 +11,11 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afe9f2c2-2ba3-4f32-bbd9-4fe771599706" name="Default Changelist" comment="" />
+    <list default="true" id="afe9f2c2-2ba3-4f32-bbd9-4fe771599706" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,11 +48,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="289" column="19" selection-start-line="289" selection-start-column="19" selection-end-line="289" selection-end-column="19" />
+            <state relative-caret-position="101">
+              <caret line="305" column="40" selection-start-line="305" selection-start-column="40" selection-end-line="305" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,7 +112,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-838">
@@ -115,21 +128,6 @@
               <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Alarm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="41" column="31" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
-              <folding>
-                <element signature="e#159#160#0" expanded="true" />
-                <element signature="e#186#187#0" expanded="true" />
-                <element signature="e#226#227#0" expanded="true" />
-                <element signature="e#258#259#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -211,7 +209,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomUserActivity.java" />
         <option value="$PROJECT_DIR$/src/main/res/layout/get_room_info.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomUserRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/content_notice.java" />
         <option value="$PROJECT_DIR$/src/main/res/xml/preferences.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/GetRoomInfo.java" />
@@ -228,12 +225,13 @@
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/AddPostActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ForumActivity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-129" />
     <option name="y" value="277" />
     <option name="width" value="978" />
@@ -418,7 +416,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17986578" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17986578" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -429,11 +427,11 @@
       <window_info anchor="bottom" id="Run" order="0" weight="0.32892805" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.2452276" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32892805" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.34654918" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34654918" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32892805" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.28928047" />
+      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.39941263" />
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32892805" />
       <window_info anchor="bottom" id="Find" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
@@ -687,13 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/GetRoomInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="988">
@@ -874,20 +865,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-838">
+          <caret line="174" selection-start-line="174" selection-end-line="174" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="289" column="19" selection-start-line="289" selection-start-column="19" selection-end-line="289" selection-end-column="19" />
+        <state relative-caret-position="101">
+          <caret line="305" column="40" selection-start-line="305" selection-start-column="40" selection-end-line="305" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-838">
-          <caret line="174" selection-start-line="174" selection-end-line="174" />
+        <state relative-caret-position="114">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
         </state>
       </provider>
     </entry>

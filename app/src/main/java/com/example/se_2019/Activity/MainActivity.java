@@ -303,7 +303,7 @@ public void checkAlarm() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
             builder.setSmallIcon(R.drawable.ic_launcher_foreground); //mipmap 사용시 Oreo 이상에서 시스템 UI 에러남
-            CharSequence channelName = "노티페케이션 채널";
+            CharSequence channelName = " 채널";
             String description = "오레오 이상을 위한 것임";
             int importance = NotificationManager.IMPORTANCE_HIGH;
 
