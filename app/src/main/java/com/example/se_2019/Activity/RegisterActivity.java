@@ -85,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userPass = et_rpass.getText().toString();
                 String userName = et_name.getText().toString();
                 String userAdd = et_add.getText().toString();
+                String userDep = et_dep2.getText().toString();
 
                 if (userID.length() == 0) {
                     Toast.makeText(getApplicationContext(), "ID를 입력하세요", Toast.LENGTH_LONG).show();
@@ -100,6 +101,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 if (userAdd.length() == 0) {
                     Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(userDep.length() == 0){
+                    Toast.makeText(getApplicationContext(), "학과를 입력하세요", Toast.LENGTH_LONG).show();
                     return;
                 }
 

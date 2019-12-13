@@ -3,7 +3,6 @@ package com.example.se_2019.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -25,7 +23,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.se_2019.Alarm;
-import com.example.se_2019.DBRequest.*;
+import com.example.se_2019.DBRequest.AddAlarm;
+import com.example.se_2019.DBRequest.AddPostRequest;
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
 import com.example.se_2019.R;
@@ -69,7 +68,7 @@ public class AddPostActivity extends AppCompatActivity {
     private static Post p;
     String userID;
     String roomCode;
-
+    String checklist="";
     private static Alarm alarm;
 
     @Override
@@ -101,7 +100,7 @@ public class AddPostActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 textView.setText("" + parent.getItemAtPosition(position));
-                saveBtn = findViewById(R.id.save);
+
                 pos = position;
 
 
@@ -110,7 +109,7 @@ public class AddPostActivity extends AppCompatActivity {
                     @Override
                     public void onSelectedDayChange(CalendarView view, int year,
                                                     int month, int dayOfMonth) {
-                          Toast.makeText(getApplicationContext(), "" + year + "/" + (month + 1) + "/" + dayOfMonth, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "" + year + "/" + (month + 1) + "/" + dayOfMonth, Toast.LENGTH_SHORT).show();
                         CalDate = findViewById(R.id.date_calendar);
                         Calstr = year + "/" + (month + 1) + "/" + dayOfMonth;
                         CalDate.setText(Calstr);
@@ -119,10 +118,9 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
-
+                saveBtn = findViewById(R.id.save);
                 Button.OnClickListener mClickListener0 = new View.OnClickListener() {
                     public void onClick(View v) {
-                        Log.i("ALARM","언제 눌리는지 보쟈"+String.valueOf(position));
                         NUMBER++;
                         date = new Date();
                         dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm", java.util.Locale.getDefault());
@@ -137,12 +135,13 @@ public class AddPostActivity extends AppCompatActivity {
                             note = new Note(userID, strDate, titles, contents);
                             p = new Post(userID, strDate, titles, contents, null, null, 0,  0);
                         } else if (pos == 1) {
+                            title = findViewById(R.id.title_vote);
                             content = findViewById(R.id.content_vote);
                             Datepick = findViewById(R.id.date_vote);
                             Datepick.setText(strDate);
                             //날짜 받아오기
-                            title = findViewById(R.id.title_vote);
                             titles = title.getText().toString();
+                            title = findViewById(R.id.title_vote);
                             //제목
                             contents = content.getText().toString();
                             //메모 입력받는 것
@@ -150,35 +149,9 @@ public class AddPostActivity extends AppCompatActivity {
                             Okbtn = findViewById(R.id.OkBtn); //리스트 추가 OK버튼
 
                             final EditText input = findViewById(R.id.inputstr);
-                            Button.OnClickListener mClickListener1 = new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    input.setVisibility(View.VISIBLE);
-                                    Okbtn.setVisibility(View.VISIBLE);
-                                }
-                            };
-                            addbtn.setOnClickListener(mClickListener1);
-                            Button.OnClickListener mClickListener2 = new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    strBox = input.getText().toString();
-                                    chkBox = new CheckBox(getApplicationContext());
-                                    chkBox.setBackgroundColor(Color.LTGRAY);
-                                    chkBox.setText(strBox);
-                                    chkBox.setTextColor(Color.BLACK);
-                                    chkBox.setVisibility(View.VISIBLE);
-                                    if (chkList.size() < 5) {
-                                        ll = findViewById(R.id.vote_top);
-                                        ll.addView(chkBox);
-                                        chkList.add(chkBox);
-                                        chkListStr.add(strBox);
-                                        input.setText("");
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "5개까지만 입력할 수 있습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            };
-                            Okbtn.setOnClickListener(mClickListener2);
+
                             Vote vote = new Vote(userID, strDate, titles, contents, chkListStr);
-                            p = new Post(userID, strDate, titles, contents, null, null, 1,  1); //chklist넣어야함
+                            p = new Post(userID, strDate, titles, contents, chkListStr, null, 1,  1); //chklist넣어야함
 
                         } else if (pos == 2) {
 
@@ -191,8 +164,8 @@ public class AddPostActivity extends AppCompatActivity {
 
                             schedule = new Schedule(userID, strDate, titles, contents, Calstr);
                             p = new Post(userID, strDate, titles, contents, null, Calstr, 2, 2);
-                            Toast.makeText(getApplicationContext(), "서버서버"+roomCode, Toast.LENGTH_LONG).show();
-                            alarm = new Alarm(Calstr, titles, roomCode);
+                            Toast.makeText(getApplicationContext(), "왜 아이디가 널이냐."+userID, Toast.LENGTH_LONG).show();
+                            alarm = new Alarm(Calstr, titles, roomCode, userID);
                             check_server();
                         }
 
@@ -223,7 +196,11 @@ public class AddPostActivity extends AppCompatActivity {
                             }
                         };
 
-                        AddPostRequest addPostRequest = new AddPostRequest(roomCode, userID, p.getWrite_date(), p.getTitle(), p.getContent(), null, p.getDday(),String.valueOf(p.getPosi()), String.valueOf(p.getNum()), responseListener);
+
+
+
+                        AddPostRequest addPostRequest = new AddPostRequest(roomCode, userID, p.getWrite_date(), p.getTitle(), p.getContent(), checklist, p.getDday(),String.valueOf(p.getPosi()), String.valueOf(p.getNum()), responseListener);
+
                         RequestQueue queue = Volley.newRequestQueue(AddPostActivity.this);
                         queue.add(addPostRequest);
 
@@ -245,6 +222,39 @@ public class AddPostActivity extends AppCompatActivity {
                     view1.setVisibility(View.VISIBLE);
                     View view2 = findViewById(R.id.calendar);
                     view2.setVisibility(View.GONE);
+                    addbtn = findViewById(R.id.AddBox); //ADD LIST
+                    Okbtn = findViewById(R.id.OkBtn); //리스트 추가 OK버튼
+
+                    final EditText input = findViewById(R.id.inputstr);
+                    Button.OnClickListener mClickListener1 = new View.OnClickListener() {
+                        public void onClick(View v) {
+                            input.setVisibility(View.VISIBLE);
+                            Okbtn.setVisibility(View.VISIBLE);
+                        }
+                    };
+                    addbtn.setOnClickListener(mClickListener1);
+                    Button.OnClickListener mClickListener2 = new View.OnClickListener() {
+                        public void onClick(View v) {
+                            strBox = input.getText().toString();
+
+                            checklist +=strBox+"@#"; //구분자 넣어서 checklist라는 변수에 합침
+                            chkBox = new CheckBox(getApplicationContext());
+                            chkBox.setBackgroundColor(Color.LTGRAY);
+                            chkBox.setText(strBox);
+                            chkBox.setTextColor(Color.BLACK);
+                            chkBox.setVisibility(View.VISIBLE);
+                            if (chkList.size() < 5) {
+                                ll = findViewById(R.id.vote_top);
+                                ll.addView(chkBox);
+                                chkList.add(chkBox);
+                                chkListStr.add(strBox);
+                                input.setText("");
+                            } else {
+                                Toast.makeText(getApplicationContext(), "5개까지만 입력할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    };
+                    Okbtn.setOnClickListener(mClickListener2);
                 } else if (pos == 2) {
                     View view0 = findViewById(R.id.post);
                     view0.setVisibility(View.GONE);
@@ -268,7 +278,6 @@ public class AddPostActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
@@ -278,6 +287,7 @@ public class AddPostActivity extends AppCompatActivity {
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+
         }
         if (id == R.id.toolbar_profile) {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
@@ -313,7 +323,7 @@ public class AddPostActivity extends AppCompatActivity {
                 }
             }
         };
-        AddAlarm addAlarmRequest = new AddAlarm(alarm.getTime(), alarm.getContent(),roomCode, responseListener_a);
+        AddAlarm addAlarmRequest = new AddAlarm(alarm.getTime(), alarm.getContent(),roomCode, alarm.getUser(), responseListener_a);
         RequestQueue queue_a = Volley.newRequestQueue(AddPostActivity.this);
         queue_a.add(addAlarmRequest);
     }

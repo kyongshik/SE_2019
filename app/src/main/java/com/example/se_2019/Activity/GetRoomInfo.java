@@ -1,4 +1,4 @@
-package com.example.se_2019;
+package com.example.se_2019.Activity;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,8 +10,7 @@ import android.os.Bundle;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
+import android.os.Vibrator;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +19,8 @@ import androidx.core.app.NotificationCompat;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.se_2019.Activity.LoginActivity;
 import com.example.se_2019.DBRequest.getRoomUserRequest;
+import com.example.se_2019.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +38,7 @@ public class GetRoomInfo extends AppCompatActivity {
     List<String> userlist = new ArrayList<>();
     String roomID,room_time;
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
-
+    public Vibrator vibrator;
 
 //    public GetRoomInfo(String roomID){
 //        this.roomID = roomID;
@@ -99,7 +98,6 @@ public class GetRoomInfo extends AppCompatActivity {
         if(currentTime.equals(time)){
             NotificationSomethings();
         }
-
     }
     public String finddate()
     {

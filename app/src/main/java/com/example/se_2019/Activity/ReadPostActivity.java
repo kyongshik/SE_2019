@@ -141,7 +141,6 @@ public class ReadPostActivity extends AppCompatActivity {
 
             };
             setBtn.setOnClickListener(mClickListener);
-
         }
         else if((Schedule) in.getParcelableExtra("cal") != null){
             Schedule s = in.getParcelableExtra("cal");

@@ -22,7 +22,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.se_2019.DBRequest.*;
 import com.example.se_2019.R;
 import com.example.se_2019.Room;
-import com.example.se_2019.content_notice;
 
 import org.json.JSONArray;
 import org.json.JSONException;

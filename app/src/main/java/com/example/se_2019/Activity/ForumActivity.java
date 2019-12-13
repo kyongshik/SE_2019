@@ -2,7 +2,6 @@ package com.example.se_2019.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +17,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.se_2019.DBRequest.AddAlarm;
 import com.example.se_2019.DBRequest.getPostListRequest;
 import com.example.se_2019.Note;
 import com.example.se_2019.Post;
@@ -31,8 +29,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -269,7 +265,4 @@ public class ForumActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

@@ -16,10 +16,7 @@ public class getRoomListRequest extends StringRequest {
         super(Request.Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-//        map.put("roomID", roomID);
         map.put("userID", userID);
-//        map.put("roomName", roomName);
-//        map.put("subName", subName);
 
     }
 
