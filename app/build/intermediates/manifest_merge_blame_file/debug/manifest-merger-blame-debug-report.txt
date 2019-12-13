@@ -18,7 +18,7 @@
 12-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:6:22-63
 13
 14    <application
-14-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:8:5-54:19
+14-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:8:5-55:19
 15        android:allowBackup="true"
 15-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:9:9-35
 16        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -31,96 +31,96 @@
 20        android:networkSecurityConfig="@xml/network_security_config"
 20-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:12:9-69
 21        android:roundIcon="@mipmap/ic_launcher_round"
-21-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:13:9-54
+21-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:14:9-54
 22        android:supportsRtl="true"
-22-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:14:9-35
+22-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:15:9-35
 23        android:testOnly="true"
 24        android:theme="@style/AppTheme" >
-24-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:15:9-40
+24-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:16:9-40
 25        <activity android:name="com.example.se_2019.Activity.content_real_notice" />
-25-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:16:9-75
-25-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:16:19-63
+25-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:17:9-75
+25-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:17:19-63
 26        <activity
-26-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:17:9-20:68
+26-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:18:9-21:68
 27            android:name="com.example.se_2019.Activity.ReadResultActivity"
-27-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:18:13-56
+27-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:19:13-56
 28            android:label="@string/title_activity_read_result"
-28-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:19:13-63
+28-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:20:13-63
 29            android:theme="@style/AppTheme.NoActionBar" />
-29-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:20:13-56
+29-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:21:13-56
 30        <activity android:name="com.example.se_2019.Activity.GetRoomInfo" />
-30-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:21:9-58
-30-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:21:19-55
+30-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:22:9-58
+30-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:22:19-55
 31        <activity
-31-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:22:9-25:59
+31-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:23:9-26:59
 32            android:name="com.example.se_2019.Activity.ReadPostActivity"
-32-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:23:13-54
+32-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:24:13-54
 33            android:label="ReadPostActivity"
-33-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:24:13-45
+33-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:25:13-45
 34            android:theme="@style/AppTheme.NoActionBar" />
-34-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:25:13-56
+34-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:26:13-56
 35        <activity android:name="com.example.se_2019.Activity.Content_Rules" />
-35-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:26:9-60
-35-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:26:19-57
+35-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:27:9-60
+35-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:27:19-57
 36        <activity android:name="com.example.se_2019.Activity.content_notice" />
-36-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:27:9-61
-36-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:27:19-58
+36-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:28:9-61
+36-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:28:19-58
 37        <activity android:name="com.example.se_2019.Activity.content_search_room" />
-37-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:28:9-66
-37-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:28:19-63
+37-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:29:9-66
+37-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:29:19-63
 38        <activity android:name="com.example.se_2019.Activity.RegisterActivity" />
-38-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:29:9-63
-38-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:29:19-60
+38-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:30:9-63
+38-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:30:19-60
 39        <activity android:name="com.example.se_2019.Activity.LoginActivity" >
-39-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:30:9-36:20
-39-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:30:19-57
+39-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:31:9-37:20
+39-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:31:19-57
 40            <intent-filter>
-40-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:31:13-35:29
+40-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:32:13-36:29
 41                <action android:name="android.intent.action.MAIN" />
-41-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:32:17-69
-41-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:32:25-66
+41-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:33:17-69
+41-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:33:25-66
 42
 43                <category android:name="android.intent.category.LAUNCHER" />
-43-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:34:17-77
-43-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:34:27-74
+43-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:35:17-77
+43-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:35:27-74
 44            </intent-filter>
 45        </activity>
 46        <activity android:name="com.example.se_2019.Activity.AddPostActivity" />
-46-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:37:9-62
-46-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:37:19-59
+46-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:38:9-62
+46-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:38:19-59
 47        <activity
-47-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:38:9-47:20
+47-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:39:9-48:20
 48            android:name="com.example.se_2019.Activity.AddRoomActivity"
-48-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:39:13-53
+48-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:40:13-53
 49            android:label=""
-49-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:40:13-29
+49-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:41:13-29
 50            android:theme="@style/AppTheme.NoActionBar" >
-50-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:41:13-56
+50-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:42:13-56
 51            <intent-filter>
-51-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:42:13-46:29
+51-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:43:13-47:29
 52                <action android:name="android.intent.action.ADDROOM" />
-52-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:43:17-72
-52-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:43:25-69
+52-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:44:17-72
+52-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:44:25-69
 53
 54                <category android:name="android.intent.category.LAUNCHER" />
-54-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:34:17-77
-54-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:34:27-74
+54-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:35:17-77
+54-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:35:27-74
 55            </intent-filter>
 56        </activity>
 57        <activity android:name="com.example.se_2019.Activity.ForumActivity" />
-57-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:48:9-60
-57-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:48:19-57
+57-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:49:9-60
+57-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:49:19-57
 58        <activity
-58-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:49:9-52:59
+58-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:50:9-53:59
 59            android:name="com.example.se_2019.Activity.MainActivity"
-59-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:50:13-50
+59-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:51:13-50
 60            android:label=""
-60-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:51:13-29
+60-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:52:13-29
 61            android:theme="@style/AppTheme.NoActionBar" />
-61-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:52:13-56
+61-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:53:13-56
 62        <activity android:name="com.example.se_2019.Activity.Preferences" />
-62-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:53:9-58
-62-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:53:19-55
+62-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:54:9-58
+62-->C:\Users\kamim\AndroidStudioProjects\SE_2019\app\src\main\AndroidManifest.xml:54:19-55
 63    </application>
 64
 65</manifest>
