@@ -93,6 +93,9 @@ public class AddPostActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String userID = bundle.getString("userID");
         roomCode = bundle.getString("room_code");
+        ArrayList<String> s = bundle.getStringArrayList("postlist");
+        int postnum = s.size();
+       // int postnum= bundle.getString("postlist").length();
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -133,7 +136,7 @@ public class AddPostActivity extends AppCompatActivity {
                             titles = title.getText().toString();
                             contents = content.getText().toString();
                             note = new Note(userID, strDate, titles, contents);
-                            p = new Post(userID, strDate, titles, contents, null, null, 0,  0);
+                            p = new Post(userID, strDate, titles, contents, null, null, 0,  postnum+1);
                         } else if (pos == 1) {
                             title = findViewById(R.id.title_vote);
                             content = findViewById(R.id.content_vote);
@@ -151,7 +154,7 @@ public class AddPostActivity extends AppCompatActivity {
                             final EditText input = findViewById(R.id.inputstr);
 
                             Vote vote = new Vote(userID, strDate, titles, contents, chkListStr);
-                            p = new Post(userID, strDate, titles, contents, chkListStr, null, 1,  1); //chklist넣어야함
+                            p = new Post(userID, strDate, titles, contents, checklist, null, 1,  postnum+1); //chklist넣어야함
 
                         } else if (pos == 2) {
 
@@ -163,10 +166,8 @@ public class AddPostActivity extends AppCompatActivity {
                             contents = content.getText().toString();
 
                             schedule = new Schedule(userID, strDate, titles, contents, Calstr);
-                            p = new Post(userID, strDate, titles, contents, null, Calstr, 2, 2);
-                            Toast.makeText(getApplicationContext(), "왜 아이디가 널이냐."+userID, Toast.LENGTH_LONG).show();
+                            p = new Post(userID, strDate, titles, contents, null, Calstr, 2, postnum+1);
                             alarm = new Alarm(Calstr, titles, roomCode, userID);
-                            check_server();
                         }
 
                         //서버에 추가
@@ -235,18 +236,19 @@ public class AddPostActivity extends AppCompatActivity {
                     addbtn.setOnClickListener(mClickListener1);
                     Button.OnClickListener mClickListener2 = new View.OnClickListener() {
                         public void onClick(View v) {
-                            strBox = input.getText().toString();
 
-                            checklist +=strBox+"@#"; //구분자 넣어서 checklist라는 변수에 합침
-                            chkBox = new CheckBox(getApplicationContext());
-                            chkBox.setBackgroundColor(Color.LTGRAY);
-                            chkBox.setText(strBox);
-                            chkBox.setTextColor(Color.BLACK);
-                            chkBox.setVisibility(View.VISIBLE);
-                            if (chkList.size() < 5) {
-                                ll = findViewById(R.id.vote_top);
-                                ll.addView(chkBox);
-                                chkList.add(chkBox);
+                                    strBox = input.getText().toString();
+
+                                    checklist +=strBox+"@#"; //구분자 넣어서 checklist라는 변수에 합침
+                                    chkBox = new CheckBox(getApplicationContext());
+                                    chkBox.setBackgroundColor(Color.LTGRAY);
+                                    chkBox.setText(strBox);
+                                    chkBox.setTextColor(Color.BLACK);
+                                    chkBox.setVisibility(View.VISIBLE);
+                                    if (chkList.size() < 5) {
+                                        ll = findViewById(R.id.vote_top);
+                                        ll.addView(chkBox);
+                                        chkList.add(chkBox);
                                 chkListStr.add(strBox);
                                 input.setText("");
                             } else {

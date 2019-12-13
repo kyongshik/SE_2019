@@ -4,24 +4,19 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class getRoomListRequest extends StringRequest {
-    final static private String URL="http://deu04202.dothome.co.kr/getRoomlist.php";
+public class getVoteResultRequest extends StringRequest {
+    final static private String URL = "http://deu04202.dothome.co.kr/getVoteResult.php";
     private Map<String, String> map;
 
-    public getRoomListRequest(String userID, Response.Listener<String> listener){
+    public getVoteResultRequest(String roomID, Response.Listener<String> listener) {
         super(Request.Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-        map.put("userID", userID);
-<<<<<<< HEAD
-=======
-
->>>>>>> a83b6b86d477b58174a39afd5eabf038fc17ab90
-
+        map.put("roomID", roomID);
+       //map.put("num", num + "");
     }
 
     @Override

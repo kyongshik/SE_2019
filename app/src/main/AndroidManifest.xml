@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.content_real_notice"></activity>
+        <activity
+            android:name=".Activity.ReadResultActivity"
+            android:label="@string/title_activity_read_result"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Activity.GetRoomInfo" />
         <activity
             android:name=".Activity.ReadPostActivity"
