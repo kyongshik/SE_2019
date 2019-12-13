@@ -11,26 +11,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afe9f2c2-2ba3-4f32-bbd9-4fe771599706" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadResultActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/AddVoteRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getVoteResultRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/layout/activity_read_result.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/layout/content_read_result.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/AddPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/AddPostActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ForumActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ForumActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/DBRequest/getRoomListRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/se_2019/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/content_read_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/content_read_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
-    </list>
+    <list default="true" id="afe9f2c2-2ba3-4f32-bbd9-4fe771599706" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +102,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-610">
+            <state relative-caret-position="-838">
               <caret line="174" selection-start-line="174" selection-end-line="174" />
             </state>
           </provider>
@@ -252,10 +233,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-129" />
+    <option name="y" value="277" />
+    <option name="width" value="978" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -904,7 +886,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/se_2019/Activity/ReadPostActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-610">
+        <state relative-caret-position="-838">
           <caret line="174" selection-start-line="174" selection-end-line="174" />
         </state>
       </provider>

@@ -17,10 +17,6 @@ public class getRoomListRequest extends StringRequest {
 
         map = new HashMap<>();
         map.put("userID", userID);
-<<<<<<< HEAD
-=======
-
->>>>>>> a83b6b86d477b58174a39afd5eabf038fc17ab90
 
     }
 
