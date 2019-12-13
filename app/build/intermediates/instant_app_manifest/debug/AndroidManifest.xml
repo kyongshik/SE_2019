@@ -23,16 +23,12 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-<<<<<<< HEAD
         <activity android:name="com.example.se_2019.Activity.content_real_notice" />
-        <activity android:name="com.example.se_2019.Activity.GetRoomInfo" />
-=======
         <activity
             android:name="com.example.se_2019.Activity.ReadResultActivity"
             android:label="@string/title_activity_read_result"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.example.se_2019.GetRoomInfo" />
->>>>>>> a83b6b86d477b58174a39afd5eabf038fc17ab90
+        <activity android:name="com.example.se_2019.Activity.GetRoomInfo" />
         <activity
             android:name="com.example.se_2019.Activity.ReadPostActivity"
             android:label="ReadPostActivity"
