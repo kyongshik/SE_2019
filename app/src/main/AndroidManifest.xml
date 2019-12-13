@@ -3,6 +3,7 @@
     package="com.example.se_2019">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,18 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.content_real_notice"></activity>
         <activity
             android:name=".Activity.ReadResultActivity"
             android:label="@string/title_activity_read_result"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".GetRoomInfo" />
+        <activity android:name=".Activity.GetRoomInfo" />
         <activity
             android:name=".Activity.ReadPostActivity"
             android:label="ReadPostActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Content_Rules" />
-        <activity android:name=".content_notice" />
-        <activity android:name=".content_search_room" />
+        <activity android:name=".Activity.Content_Rules" />
+        <activity android:name=".Activity.content_notice" />
+        <activity android:name=".Activity.content_search_room" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>

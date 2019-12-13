@@ -1,4 +1,4 @@
-package com.example.se_2019;
+package com.example.se_2019.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.se_2019.*;

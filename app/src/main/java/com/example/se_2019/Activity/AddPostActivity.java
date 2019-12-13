@@ -112,7 +112,7 @@ public class AddPostActivity extends AppCompatActivity {
                     @Override
                     public void onSelectedDayChange(CalendarView view, int year,
                                                     int month, int dayOfMonth) {
-                          Toast.makeText(getApplicationContext(), "" + year + "/" + (month + 1) + "/" + dayOfMonth, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "" + year + "/" + (month + 1) + "/" + dayOfMonth, Toast.LENGTH_SHORT).show();
                         CalDate = findViewById(R.id.date_calendar);
                         Calstr = year + "/" + (month + 1) + "/" + dayOfMonth;
                         CalDate.setText(Calstr);
@@ -167,8 +167,7 @@ public class AddPostActivity extends AppCompatActivity {
 
                             schedule = new Schedule(userID, strDate, titles, contents, Calstr);
                             p = new Post(userID, strDate, titles, contents, null, Calstr, 2, postnum+1);
-                            alarm = new Alarm(Calstr, titles, roomCode);
-                            check_server();
+                            alarm = new Alarm(Calstr, titles, roomCode, userID);
                         }
 
                         //서버에 추가
@@ -237,6 +236,7 @@ public class AddPostActivity extends AppCompatActivity {
                     addbtn.setOnClickListener(mClickListener1);
                     Button.OnClickListener mClickListener2 = new View.OnClickListener() {
                         public void onClick(View v) {
+
                                     strBox = input.getText().toString();
 
                                     checklist +=strBox+"@#"; //구분자 넣어서 checklist라는 변수에 합침
@@ -325,7 +325,7 @@ public class AddPostActivity extends AppCompatActivity {
                 }
             }
         };
-        AddAlarm addAlarmRequest = new AddAlarm(alarm.getTime(), alarm.getContent(),roomCode, responseListener_a);
+        AddAlarm addAlarmRequest = new AddAlarm(alarm.getTime(), alarm.getContent(),roomCode, alarm.getUser(), responseListener_a);
         RequestQueue queue_a = Volley.newRequestQueue(AddPostActivity.this);
         queue_a.add(addAlarmRequest);
     }

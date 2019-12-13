@@ -1,4 +1,4 @@
-package com.example.se_2019;
+package com.example.se_2019.Activity;
 
 
 import android.content.Intent;
@@ -13,11 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.se_2019.Activity.*;
+import com.example.se_2019.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Content_Rules extends AppCompatActivity {
+public class content_real_notice extends AppCompatActivity {
     String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,8 @@ public class Content_Rules extends AppCompatActivity {
 
         ListView listView = (ListView)findViewById(R.id.listView_rule);
         List<String> list = new ArrayList<>();
-        list.add("경식");
-        list.add("현아");
-        list.add("안녕");
-        list.add("나예윤");
+        list.add("해당 애플리케이션은 배타버전으로 에러가 있을 수 있습니다.");
+        list.add("좋은 하루 되세요.");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(adapter);

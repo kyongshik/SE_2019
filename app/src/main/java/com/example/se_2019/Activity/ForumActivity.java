@@ -24,7 +24,6 @@ import com.example.se_2019.Post;
 import com.example.se_2019.R;
 import com.example.se_2019.Schedule;
 import com.example.se_2019.Vote;
-import com.example.se_2019.content_notice;
 
 import org.json.JSONArray;
 import org.json.JSONException;

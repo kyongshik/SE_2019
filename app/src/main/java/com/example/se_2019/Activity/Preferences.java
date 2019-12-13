@@ -3,6 +3,7 @@ package com.example.se_2019.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -13,19 +14,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.se_2019.Content_Rules;
 import com.example.se_2019.R;
-import com.example.se_2019.*;
 
 public class Preferences extends PreferenceActivity {
     Preference preference_notice, preference_rule, preference_logout;
     String userID;
+    SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //상단바 처리를 위한 코드
         final Intent intent_pre = getIntent();
         userID = intent_pre.getExtras().getString("userID");
-        Log.i("PRE","여기들어요냐");
 
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
@@ -34,7 +33,7 @@ public class Preferences extends PreferenceActivity {
         preference_notice.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Intent intent = new Intent(Preferences.this, content_notice.class);
+                Intent intent = new Intent(Preferences.this, content_real_notice.class);
                 intent.putExtra("userID",userID);
                 startActivity(intent);
                 return true;
@@ -76,6 +75,7 @@ public class Preferences extends PreferenceActivity {
                 return true;
             }
         });
+
         //setContentView(R.layout.activity_preferences);
 
     }

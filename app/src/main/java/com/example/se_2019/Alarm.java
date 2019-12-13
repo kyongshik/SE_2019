@@ -37,10 +37,11 @@ public class Alarm {
     public void setContent(String content) {
         this.content = content;
     }
-    public Alarm(String time, String content, String roomcode){
+    public Alarm(String time, String content, String roomcode, String user){
         this.time = time;
         this.content = content;
         this.roomcode = roomcode;
+        this.user = user;
     }
     public Alarm(String user, String time){
         this.user = user;

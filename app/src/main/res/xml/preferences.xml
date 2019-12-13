@@ -21,13 +21,8 @@
             android:key="key_rule"
             android:text="커뮤니티 이용규칙"
             android:title="커뮤니티 이용규칙" />
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/ringtone_alignment"
-            android:entryValues="@array/ringtone_alignment"
-            android:key="list_preference_1"
-            android:title="알림설정"
-            android:text="알림 설정"/>
+
+
 
 
     </PreferenceCategory>

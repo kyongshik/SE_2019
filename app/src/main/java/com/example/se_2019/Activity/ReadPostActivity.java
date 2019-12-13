@@ -173,6 +173,7 @@ public class ReadPostActivity extends AppCompatActivity {
             };
             setBtn.setOnClickListener(mClickListener);
 
+
             //결과 보기 버튼 클릭시
             resultBtn = (Button) findViewById(R.id.Read_Post_vote_ResultBtn);
             resultBtn.setOnClickListener(
