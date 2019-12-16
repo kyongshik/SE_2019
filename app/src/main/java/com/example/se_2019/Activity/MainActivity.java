@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
     List<String> userRoomID = new ArrayList<>();
     List<String> userRoomCode = new ArrayList<>();
-    List<String> userlist = new ArrayList<>();
+    List<Room> userlist = new ArrayList<>();
     public static final String NOTIFICATION_CHANNEL_ID = "10001";
-
+    private static Handler mHandler ;
+    NewRunnable nr;
+    Thread t;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +104,48 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
 
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                alarm_time = jsonObject.getString("time");
+                                alarm_title = jsonObject.getString("title");
+                                roomcode = jsonObject.getString("roomcode");
+                                userID_alarm = jsonObject.getString("userID");
+                                Alarm alarm = new Alarm(alarm_time, alarm_title, roomcode,userID_alarm);
+                                userAlarm.add(alarm);
+
+                            }
+                            for(int k =0; k < userAlarm.size(); k++){
+                                for(int j = 0; j < userlist.size(); j++){
+                                    if( userAlarm.get(k).getRoomcode().equals(userlist.get(j).getRoomID())){//userAlarm.get(k).getUser().equals(userlist.get(j).getUserID()) &&
+                                        timeAlarm(userlist.get(j),userAlarm.get(k));
+                                    }
+                                }
+
+                            }
+                            adapter.notifyDataSetChanged();
+                            nr.threadStop(false);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                getAlarmRequest alarmRequest = new getAlarmRequest(responseListener); //여기서 userID로 보내는거 같음
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                queue.add(alarmRequest);
+            }
+        } ;
+        nr = new NewRunnable();
+        t = new Thread(nr);
+        t.start();
 
         listView.setAdapter(adapter);
         //사용자에게 해당되는 방 리스트를 불러옴
@@ -124,9 +170,9 @@ public class MainActivity extends AppCompatActivity {
                         roomlist.add(room);
                         adapter.notifyDataSetChanged();
                     }
-//                    getUser();
-//                    checkAlarm();
-                    NotificationSomethings();
+                    getUser();
+
+//                    NotificationSomethings();
                     if (roomlist.size() == 0) {
                         Toast.makeText(context, "방목록이 없습니다.", Toast.LENGTH_SHORT).show();
                     }
@@ -187,45 +233,45 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-public void checkAlarm() {
+    class NewRunnable implements Runnable {
+        Boolean thread_state = true;
 
-    Toast.makeText(this, "따란.", Toast.LENGTH_SHORT).show();
-    Response.Listener<String> responseListener = new Response.Listener<String>() {
         @Override
-        public void onResponse(String response) {
-            try {
-                JSONArray jsonArray = new JSONArray(response);
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+        public void run() {
 
-                    alarm_time = jsonObject.getString("time");
-                    alarm_title = jsonObject.getString("title");
-                    roomcode = jsonObject.getString("roomcode");
-                    userID_alarm = jsonObject.getString("userID");
-                    Alarm alarm = new Alarm(alarm_time, alarm_title, roomcode,userID_alarm);
-                    userAlarm.add(alarm);
+            while (thread_state) {
 
+                try {
+                    Thread.sleep(1000*10);
+                } catch (Exception e) {
+                    e.printStackTrace() ;
                 }
-                for(int k =0; k < userAlarm.size(); k++){
-                    for(int j = 0; j < userlist.size(); j++){
-                        if(userAlarm.get(k).getUser().equals(userlist.get(j))){
-                            timeAlarm(userAlarm);
-                        }
-                    }
 
-                }
-                adapter.notifyDataSetChanged();
-                //timeAlarm(userRoomID);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                mHandler.sendEmptyMessage(0) ;
             }
         }
-    };
-    getAlarmRequest alarmRequest = new getAlarmRequest(responseListener); //여기서 userID로 보내는거 같음
-    RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-    queue.add(alarmRequest);
+        public void threadStop(Boolean thread_state){
+            this.thread_state = thread_state;
+        }
+    }
 
-}
+//public void checkAlarm() {
+//    mainThread = new Thread(new Runnable() {
+//        @Override
+//        public void run() {
+//            boolean run = true;
+//            while(run){
+//                try{
+//                    Thread.sleep(1000*10*1);
+//                }catch (InterruptedException e){
+//                    run = false;
+//                    e.printStackTrace();;
+//                }
+//            }
+//        }
+//    });
+//
+//}
     public void getUser(){
         Toast.makeText(this, "뾰룡.", Toast.LENGTH_SHORT).show();
         Response.Listener<String> responseListener_a = new Response.Listener<String>() {
@@ -237,11 +283,13 @@ public void checkAlarm() {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                        String roomID = jsonObject.getString("roomID");
                         String user = jsonObject.getString("userID");
-                        userlist.add(user);
+                        Room temp = new Room(roomID,user);
+                        userlist.add(temp);
 
                     }
-                   // timeAlarm(list);
+  //                  checkAlarm();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -253,11 +301,10 @@ public void checkAlarm() {
             q.add(roomUserRequest);
         }
     }
-    public void timeAlarm(List list) {
+    public void timeAlarm(Room room, Alarm alarm) {
         String currentTime = finddate();
         String[] temp;
-        for (int i = 0; i < list.size(); i++) {
-            String text = list.get(i).toString();
+            String text = alarm.getTime().toString();
             temp = text.toString().split("/");
             int day = Integer.parseInt(temp[2]);
             day--;
@@ -267,10 +314,10 @@ public void checkAlarm() {
                 temp[2] = String.valueOf(day);
             }
             String time = temp[0] + "/" + temp[1] + "/" + temp[2];
-            if (currentTime.equals(time)) {
-                NotificationSomethings();
+            if (currentTime.equals(time) && userID.equals(room.getUserID())) {
+                NotificationSomethings(alarm);
             }
-        }
+
     }
 
     public String finddate() {
@@ -281,24 +328,25 @@ public void checkAlarm() {
         return fmdate;
     }
 
-    public void NotificationSomethings() {
+    public void NotificationSomethings(Alarm alarm) {
 
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent notificationIntent = new Intent(this, content_notice.class);
+        Intent notificationIntent = new Intent(this,LoginActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_foreground)) //BitMap 이미지 요구
-                .setContentTitle("schedule!")
+                .setContentTitle(alarm.getContent())
                 .setContentText("일정까지 하루 남았습니다.")
                 // 더 많은 내용이라서 일부만 보여줘야 하는 경우 아래 주석을 제거하면 setContentText에 있는 문자열 대신 아래 문자열을 보여줌
                 //.setStyle(new NotificationCompat.BigTextStyle().bigText("더 많은 내용을 보여줘야 하는 경우..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent) // 사용자가 노티피케이션을 탭시 ResultActivity로 이동하도록 설정
                 .setAutoCancel(true);
-
+        nr.threadStop(false);
+        t.interrupt();
         //OREO API 26 이상에서는 채널 필요
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
