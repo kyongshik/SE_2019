@@ -21,6 +21,9 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     EditText et_lid, et_lpass;
     private Button btn_login, btn_register;
+    String userID,userPass;
+    ////////////////////////////////
+    Boolean state;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //edit text에 현재 입력되어있는 값을 가져온다
-                String userID = et_lid.getText().toString();
-                String userPass = et_lpass.getText().toString();
+                userID = et_lid.getText().toString();
+                userPass = et_lpass.getText().toString();
                 if(userID.length()==0){
                     Toast.makeText(getApplicationContext(), "ID를 입력하세요", Toast.LENGTH_LONG).show();
                     return;
@@ -54,13 +57,18 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요", Toast.LENGTH_LONG).show();
                     return;
                 }
+                check_userID();
+
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
                         try {
-
+                            if (state == false ){
+                                Toast.makeText(getApplicationContext(), "유효한 아이디가 아닙니다.", Toast.LENGTH_LONG).show();
+                                return;
+                            }
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
                             if(success){
@@ -70,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                             else{
+
                                 Toast.makeText(getApplicationContext(), "로그인에 실패하였습니다.", Toast.LENGTH_LONG).show();
                                 return;
                             }
@@ -91,6 +100,38 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
+    public void check_userID(){
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("success");
+                    if(success){
+                        state = true;
+                    }
+                    else{
+                        state = false;
+                    }
+                    et_lid.setText("");
+                    et_lpass.setText("");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        LoginUserRequest loginRequest = new LoginUserRequest(userID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+        queue.add(loginRequest);
+
+    }
 
 
 }
+
+

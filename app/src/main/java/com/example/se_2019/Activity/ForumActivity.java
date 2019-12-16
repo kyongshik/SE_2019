@@ -159,6 +159,7 @@ public class ForumActivity extends AppCompatActivity {
                 String temp = adapter.getItem(position).substring(0, 3);
                 Toast.makeText(getApplicationContext(), "클릭 " + temp, Toast.LENGTH_SHORT).show();
                 Intent in = new Intent(ForumActivity.this, ReadPostActivity.class);
+                in.putExtra("userID",userID);
                 Post p;
 
                 p = postlist.get(list_itemArrayList.get(position).getNum() - 1);

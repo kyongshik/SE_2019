@@ -97,6 +97,9 @@ public class Preferences extends PreferenceActivity {
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, content_notice.class);
+            intent.putExtra("userID",userID);
+            startActivity(intent);
         }
         if (id == R.id.toolbar_profile) {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();

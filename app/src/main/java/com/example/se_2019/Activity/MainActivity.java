@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
             while (thread_state) {
 
                 try {
-                    Thread.sleep(1000*10);
+                    Thread.sleep(1000*30);
                 } catch (Exception e) {
                     e.printStackTrace() ;
                 }
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//public void checkAlarm() {
+    //public void checkAlarm() {
 //    mainThread = new Thread(new Runnable() {
 //        @Override
 //        public void run() {
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
                         userlist.add(temp);
 
                     }
-  //                  checkAlarm();
+                    //                  checkAlarm();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -304,19 +304,19 @@ public class MainActivity extends AppCompatActivity {
     public void timeAlarm(Room room, Alarm alarm) {
         String currentTime = finddate();
         String[] temp;
-            String text = alarm.getTime().toString();
-            temp = text.toString().split("/");
-            int day = Integer.parseInt(temp[2]);
-            day--;
-            if (day < 10) {
-                temp[2] = "0" + String.valueOf(day);
-            } else {
-                temp[2] = String.valueOf(day);
-            }
-            String time = temp[0] + "/" + temp[1] + "/" + temp[2];
-            if (currentTime.equals(time) && userID.equals(room.getUserID())) {
-                NotificationSomethings(alarm);
-            }
+        String text = alarm.getTime().toString();
+        temp = text.toString().split("/");
+        int day = Integer.parseInt(temp[2]);
+        day--;
+        if (day < 10) {
+            temp[2] = "0" + String.valueOf(day);
+        } else {
+            temp[2] = String.valueOf(day);
+        }
+        String time = temp[0] + "/" + temp[1] + "/" + temp[2];
+        if (currentTime.equals(time) && userID.equals(room.getUserID())) {
+            NotificationSomethings(alarm);
+        }
 
     }
 

@@ -21,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ReadResultActivity extends AppCompatActivity {
-
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +32,7 @@ public class ReadResultActivity extends AppCompatActivity {
         String roomID = in.getStringExtra("roomID");
         int num = in.getIntExtra("num", 0);
         String chkString = in.getStringExtra("chklist");
+        userID = in.getExtras().getString("userID");
         String[] chkArray = chkString.split("@#"); //chklist가져옴
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -125,10 +126,15 @@ public class ReadResultActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, content_notice.class);
+            intent.putExtra("userID",userID);
+            startActivity(intent);
         }
         if (id == R.id.toolbar_profile) {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
