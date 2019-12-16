@@ -168,6 +168,7 @@ public class AddPostActivity extends AppCompatActivity {
                             schedule = new Schedule(userID, strDate, titles, contents, Calstr);
                             p = new Post(userID, strDate, titles, contents, null, Calstr, 2, postnum+1);
                             alarm = new Alarm(Calstr, titles, roomCode, userID);
+                            check_server();
                         }
 
                         //서버에 추가

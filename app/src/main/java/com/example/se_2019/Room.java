@@ -17,6 +17,11 @@ public class Room implements Parcelable
         this.roomName = name;
 
     }
+    public Room(String roomID, String userID) {
+        this.roomID = roomID;
+        this.userID = userID;
+
+    }
 
     protected Room(Parcel in) {
         roomID = in.readString();
