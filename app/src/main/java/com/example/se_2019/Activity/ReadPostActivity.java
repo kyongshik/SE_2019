@@ -46,6 +46,7 @@ public class ReadPostActivity extends AppCompatActivity {
     final int REQUESTCODE = 21;
     final int NEW_POST = 22;
 
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class ReadPostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_read_post);
         Intent in = getIntent();
         // Note s = (Note) in.getParcelableExtra("post");
+        userID = in.getExtras().getString("userID");
         Post p = in.getParcelableExtra("post");
         String userID = in.getStringExtra("userID");
         String roomID = in.getStringExtra("roomID");
@@ -183,6 +185,7 @@ public class ReadPostActivity extends AppCompatActivity {
                             intent.putExtra("roomID", roomID);
                             intent.putExtra("num", num);
                             intent.putExtra("chklist", p.getChklist());
+                            intent.putExtra("userID",userID);
                             startActivity(intent);
                         }
                     }
@@ -238,10 +241,15 @@ public class ReadPostActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Toast.makeText(this, "홈버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
         }
         if (id == R.id.toolbar_alarm) {
             Toast.makeText(this, "알람버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, content_notice.class);
+            intent.putExtra("userID",userID);
+            startActivity(intent);
         }
         if (id == R.id.toolbar_profile) {
             Toast.makeText(this, "프로필버튼을 눌렀습니다", Toast.LENGTH_SHORT).show();

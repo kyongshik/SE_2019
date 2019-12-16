@@ -99,14 +99,15 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "이름을 입력하세요", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (userAdd.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_LONG).show();
-                    return;
-                }
                 if(userDep.length() == 0){
                     Toast.makeText(getApplicationContext(), "학과를 입력하세요", Toast.LENGTH_LONG).show();
                     return;
                 }
+                if (userAdd.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
 
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {

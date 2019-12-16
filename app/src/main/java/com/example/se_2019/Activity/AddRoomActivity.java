@@ -32,12 +32,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class AddRoomActivity extends AppCompatActivity {
-    EditText room_name,sub_name;
+    EditText room_name,sub_name,prof,time;
     String room_code="";
     Room room;
     String userid="";
     String text;
     String userID; //intent로 넘어오는 id
+
+
     Button btn_search;
     ArrayList<Room> roomlist = new ArrayList<Room>();
 
@@ -55,6 +57,9 @@ public class AddRoomActivity extends AppCompatActivity {
         /////
         room_name = (EditText)findViewById(R.id.etname);
         sub_name = (EditText)findViewById(R.id.subject_name);
+        prof = (EditText)findViewById(R.id.prof_name);
+        time = (EditText)findViewById(R.id.subject_time);
+
 
         final Intent intent_Add = getIntent();
         userID = intent_Add.getExtras().getString("userID");
@@ -210,7 +215,26 @@ public class AddRoomActivity extends AppCompatActivity {
             String userID =userid; //여기 바꿔줘야함
             String roomName = room_name.getText().toString();
             String subName = sub_name.getText().toString();
+            String pro = prof.getText().toString();
+            String time_ = time.getText().toString();
 
+
+            if(roomName.length() == 0){
+                Toast.makeText(getApplicationContext(), "방 이름을 입력하세요", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(subName.length() == 0){
+                Toast.makeText(getApplicationContext(), "과목명을 입력하세요", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(pro.length() == 0){
+                Toast.makeText(getApplicationContext(), "교수님 성함을 입력하세요", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if(time_.length() == 0){
+                Toast.makeText(getApplicationContext(), "과목 시간을 입력하세요", Toast.LENGTH_LONG).show();
+                return;
+            }
             room = new Room(room_name.getText().toString());
             room.setCode(roomID);
             room.setUserID(userID);
