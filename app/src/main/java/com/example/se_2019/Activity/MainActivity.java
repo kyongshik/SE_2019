@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
             while (thread_state) {
 
                 try {
-                    Thread.sleep(1000*30);
+                    Thread.sleep(1000*600);
                 } catch (Exception e) {
                     e.printStackTrace() ;
                 }
